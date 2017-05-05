@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DevTeamup.Models
 {
-    public class Attendance
+    public class Collaboration
     {
         public Teamup Teamup { get; set; }
 
-        public ApplicationUser Attendee { get; set; }
+        public ApplicationUser Contributor { get; set; }
 
         [Key]
         [Column(Order = 1)]
@@ -15,6 +15,6 @@ namespace DevTeamup.Models
 
         [Key]
         [Column(Order = 2)]
-        public string AttendeeId { get; set; }
+        public string ContributorId { get; set; }
     }
 }

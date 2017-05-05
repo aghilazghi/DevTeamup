@@ -200,9 +200,13 @@
     <Compile Include="Migrations\201705051400244_AddPropertiesToApplicationuserTable.Designer.cs">
       <DependentUpon>201705051400244_AddPropertiesToApplicationuserTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705051713188_AddCollaborationTable.cs" />
+    <Compile Include="Migrations\201705051713188_AddCollaborationTable.Designer.cs">
+      <DependentUpon>201705051713188_AddCollaborationTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Models\Attendance.cs" />
+    <Compile Include="Models\Collaboration.cs" />
     <Compile Include="Models\DevelopmentLanguage.cs" />
     <Compile Include="Models\DevelopmentType.cs" />
     <Compile Include="Models\Favorite.cs" />
@@ -313,6 +317,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705051400244_AddPropertiesToApplicationuserTable.resx">
       <DependentUpon>201705051400244_AddPropertiesToApplicationuserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705051713188_AddCollaborationTable.resx">
+      <DependentUpon>201705051713188_AddCollaborationTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
