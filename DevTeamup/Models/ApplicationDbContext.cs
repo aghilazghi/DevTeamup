@@ -12,7 +12,8 @@ namespace DevTeamup.Models
         public DbSet<DevelopmentType> DevelopmentTypes { get; set; }
         public DbSet<DevelopmentLanguage> DevelopmentLanguages { get; set; }
         public DbSet<Collaboration> Collaborations { get; set; }
-
+        public DbSet<Favorite> Favorites { get; set; }
+        
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -29,6 +30,11 @@ namespace DevTeamup.Models
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
 
             modelBuilder.Entity<Collaboration>()
+                .HasRequired(a => a.Teamup)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Favorite>()
                 .HasRequired(a => a.Teamup)
                 .WithMany()
                 .WillCascadeOnDelete(false);

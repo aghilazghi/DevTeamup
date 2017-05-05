@@ -20,7 +20,7 @@ namespace DevTeamup.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Join(CollaborationDto dto)
+        public IHttpActionResult Collaborate(CollaborationDto dto)
         {
             var userId = User.Identity.GetUserId();
 

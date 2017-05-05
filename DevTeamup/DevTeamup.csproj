@@ -206,6 +206,10 @@
     <Compile Include="Migrations\201705051713188_AddCollaborationTable.Designer.cs">
       <DependentUpon>201705051713188_AddCollaborationTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705051738404_CreateFavoriteTable.cs" />
+    <Compile Include="Migrations\201705051738404_CreateFavoriteTable.Designer.cs">
+      <DependentUpon>201705051738404_CreateFavoriteTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Collaboration.cs" />
@@ -322,6 +326,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705051713188_AddCollaborationTable.resx">
       <DependentUpon>201705051713188_AddCollaborationTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705051738404_CreateFavoriteTable.resx">
+      <DependentUpon>201705051738404_CreateFavoriteTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
