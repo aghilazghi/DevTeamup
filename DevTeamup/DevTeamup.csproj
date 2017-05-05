@@ -179,10 +179,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CollaborationsController.cs" />
+    <Compile Include="Controllers\FavoritesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TeamupsController.cs" />
     <Compile Include="Dtos\CollaborationDto.cs" />
+    <Compile Include="Dtos\FavoriteDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
