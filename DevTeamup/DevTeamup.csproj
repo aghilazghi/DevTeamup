@@ -187,10 +187,20 @@
     <Compile Include="Migrations\201705051317342_InitialModels.Designer.cs">
       <DependentUpon>201705051317342_InitialModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705051340084_CreateTeamupAndLookupsTables.cs" />
+    <Compile Include="Migrations\201705051340084_CreateTeamupAndLookupsTables.Designer.cs">
+      <DependentUpon>201705051340084_CreateTeamupAndLookupsTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Attendance.cs" />
+    <Compile Include="Models\DevelopmentLanguage.cs" />
+    <Compile Include="Models\DevelopmentType.cs" />
+    <Compile Include="Models\Favorite.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Teamup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -264,6 +274,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705051317342_InitialModels.resx">
       <DependentUpon>201705051317342_InitialModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705051340084_CreateTeamupAndLookupsTables.resx">
+      <DependentUpon>201705051340084_CreateTeamupAndLookupsTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
