@@ -1,5 +1,6 @@
-﻿using System.Data.Entity;
+﻿using DevTeamup.Migrations;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace DevTeamup.Models
 {
@@ -19,6 +20,13 @@ namespace DevTeamup.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

@@ -191,6 +191,14 @@
     <Compile Include="Migrations\201705051340084_CreateTeamupAndLookupsTables.Designer.cs">
       <DependentUpon>201705051340084_CreateTeamupAndLookupsTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705051351034_PopulateLookupTables.cs" />
+    <Compile Include="Migrations\201705051351034_PopulateLookupTables.Designer.cs">
+      <DependentUpon>201705051351034_PopulateLookupTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705051400244_AddPropertiesToApplicationuserTable.cs" />
+    <Compile Include="Migrations\201705051400244_AddPropertiesToApplicationuserTable.Designer.cs">
+      <DependentUpon>201705051400244_AddPropertiesToApplicationuserTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -277,6 +285,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705051340084_CreateTeamupAndLookupsTables.resx">
       <DependentUpon>201705051340084_CreateTeamupAndLookupsTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705051351034_PopulateLookupTables.resx">
+      <DependentUpon>201705051351034_PopulateLookupTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705051400244_AddPropertiesToApplicationuserTable.resx">
+      <DependentUpon>201705051400244_AddPropertiesToApplicationuserTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
