@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 80px;
     padding-bottom: 20px;
 }
 
@@ -47,6 +47,8 @@ footer {
     padding: 10px 0 0 0;
     
 }
+
+.top-margin { margin-top: 10px; }
 
 /* Override Bootstrap*/
 
@@ -99,6 +101,22 @@ footer {
     margin-bottom: 17px;
 }
 
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 .form-control {
     font-size: 16px;
     height: 42px;
@@ -117,4 +135,77 @@ footer {
     padding: 6px 18px;*/
     -ms-border-radius: 8px;
     border-radius: 8px;
+}
+
+/*page specifice styles*/
+.teamups {
+    list-style: none;
+    padding: 0;
+}
+
+.teamups > li {
+    position: relative;
+    padding: 0;
+    margin: 0 30px 30px 10px;
+}
+
+.teamups > li .date-And-detail {
+    background:#E0E0E0;
+        
+}
+
+.teamups > li .date {
+    background: #546E7A;
+    color: #E3F2FD;
+    text-align: center;
+    width: 50px;
+}
+
+.teamups > li .date .month {
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 3px;
+}
+
+.teamups > li .date .day-and-year {
+    background: #B0BEC5;
+    color: #455A64;
+}
+
+.teamups > li .date .day-and-year .day {
+    padding: 3px 0 3px 0;
+}
+.teamups > li .date .day-and-year .year {
+    padding: 0 0 3px 0;
+}
+.teamups > li .details {
+    position: absolute;
+    top: 0;
+    left: 70px;
+    padding: 3px 0 3px 0;
+    color: #455A64;
+}
+
+.teamups > li .date-And-detail .details .type {
+    font-weight: 700;  
+    margin-bottom: 5px; 
+}
+
+.teamups > li .date-And-detail .details .language {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.teamups > li .date-And-detail .details .programmer {
+    font-size: 14px;
+}
+
+.teamups > li .link-buttons {
+    background: #CFD8DC;
+    padding: 7px 7px 7px 60px; 
+}
+
+.teamups > li .right-padding {
+    padding: 0 40px 0 0;
 }

@@ -1,30 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DevTeamup.Models;
+using DevTeamup.ViewModels;
+using System;
 using System.Linq;
-using System.Web;
+using System.Data.Entity;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace DevTeamup.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ApplicationDbContext _context;
+
+        public HomeController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
         public ActionResult Index()
         {
-            return View();
-        }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+            var futureTeamups = _context.Teamups
+                .Include(t => t.Organizer)
+                .Include(t => t.DevelopmentLanguage)
+                .Include(t => t.DevelopmentType)
+                .Where(t => t.DateTime > DateTime.Now)
+                .OrderBy(t => t.DateTime)
+                .ToList();
 
-            return View();
-        }
+            var viewModel = new TeamupsViewModel
+            {
+                FutureTeamups = futureTeamups,
+                IsAuthenticated = User.Identity.IsAuthenticated,
+                CurrentUserId = User.Identity.GetUserId(),
+                Title = "Future Teamups"
+            };
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View("Teamups", viewModel);
         }
     }
 }

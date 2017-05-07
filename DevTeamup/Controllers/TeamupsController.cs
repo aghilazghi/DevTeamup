@@ -1,4 +1,5 @@
-﻿using DevTeamup.Models;
+﻿using System.Data.Entity;
+using DevTeamup.Models;
 using DevTeamup.ViewModels;
 using Microsoft.AspNet.Identity;
 using System.Linq;
@@ -13,6 +14,29 @@ namespace DevTeamup.Controllers
         public TeamupsController()
         {
             _context = new ApplicationDbContext();
+        }
+
+        [Authorize]
+        public ActionResult Contributing()
+        {
+            var currentUserId = User.Identity.GetUserId();
+            var teamups = _context.Collaborations
+                .Where(c => c.ContributorId == currentUserId)
+                .Select(c => c.Teamup)
+                .Include(c => c.Organizer)
+                .Include(c => c.DevelopmentLanguage)
+                .Include(c => c.DevelopmentType)
+                .ToList();
+
+            var viewModel = new TeamupsViewModel
+            {
+                FutureTeamups = teamups,
+                IsAuthenticated = User.Identity.IsAuthenticated,
+                CurrentUserId = currentUserId,
+                Title = "Teamups I'm Contributing"
+            };
+
+            return View("Teamups", viewModel);
         }
 
         [Authorize]

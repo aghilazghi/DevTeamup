@@ -1,0 +1,90 @@
+﻿@model DevTeamup.ViewModels.TeamupsViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h3>@Model.Title</h3>
+<hr />
+
+<ul class="teamups row">
+    @foreach (var teamup in Model.FutureTeamups)
+    {
+        <li class="col-md-3">
+            <div class="date-And-detail">
+                <div class="date">
+                    <div class="month">
+                        @teamup.DateTime.ToString("MMM")
+                    </div>
+                    <div class="day-and-year">
+                        <div class="day">
+                            @teamup.DateTime.ToString("d ")
+                        </div>
+                        <div class="year">
+                            @teamup.DateTime.ToString("yyyy")
+                        </div>
+                    </div>
+                </div>
+                <div class="details">
+                    <div class="type">
+                        @teamup.DevelopmentType.Name
+                    </div>
+                    <div class="language">
+                        With @teamup.DevelopmentLanguage.Name
+
+                    </div>
+                    <div class="organizer">
+                        Organizer: @teamup.Organizer.FirstName @teamup.Organizer.LastName
+                    </div>
+                </div>
+            </div>
+
+            @if (Model.IsAuthenticated && Model.CurrentUserId != teamup.OrganizerId)
+            {
+                <div class="link-buttons">
+                    <span>
+                        <button data-teamup-id="@teamup.Id" class="btn btn-link btn-sm js-toggle-attendance">Join</button>
+                    </span>
+                    <span>
+                        <button data-teamup-id="@teamup.Id" class="btn btn-link btn-sm js-toggle-favorite">Mark as your favorite</button>
+
+                    </span>
+                    <span>
+                        <button class="btn btn-link btn-sm pull-right">Details</button>
+                    </span>
+                </div>
+            }
+
+        </li>
+    }
+</ul>
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            $(".js-toggle-attendance").click(function(e) {
+                var buttonEvent = $(e.target);
+                $.post("/api/collaborations", { teamupId: buttonEvent.attr("data-teamup-id") })
+                    .done(function() {
+                        buttonEvent
+                            .removeClass("btn-default")
+                            .addClass("btn-success")
+                            .text("Joined");
+                    })
+                    .fail(function() {
+                        alert("Something failed!");
+                    });
+            });
+
+            $(".js-toggle-favorite").click(function (e) {
+                var buttonEvent = $(e.target);
+                $.post("/api/favorites", { teamupId: buttonEvent.attr("data-teamup-id") })
+                    .done(function () {
+                        buttonEvent.text("Marked as your favorite");
+                    })
+                    .fail(function () {
+                        alert("Something failed");
+                    });
+            });
+        });
+    </script>
+}

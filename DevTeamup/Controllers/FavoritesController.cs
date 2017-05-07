@@ -22,14 +22,14 @@ namespace DevTeamup.Controllers
         [HttpPost]
         public IHttpActionResult Favor(FavoriteDto dto)
         {
-            var currentLoggedIn = User.Identity.GetUserId();
+            var currentUser = User.Identity.GetUserId();
 
-            if (_context.Favorites.Any(f => f.FavoringUserId == currentLoggedIn && f.TeamupId == dto.TeamupId))
+            if (_context.Favorites.Any(f => f.FavoringUserId == currentUser && f.TeamupId == dto.TeamupId))
                 return BadRequest("Already favored.");
 
             var favorite = new Favorite
             {
-                FavoringUserId = currentLoggedIn,
+                FavoringUserId = currentUser,
                 TeamupId = dto.TeamupId
             };
 
