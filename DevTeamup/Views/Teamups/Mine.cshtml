@@ -1,0 +1,55 @@
+﻿@model IEnumerable<DevTeamup.Models.Teamup>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Teamups I'm Hosting</h3>
+<hr />
+
+<ul class="teamups row">
+    @foreach (var teamup in Model)
+    {
+        <li class="col-md-3">
+            <div class="date-And-detail">
+                <div class="date">
+                    <div class="month">
+                        @teamup.DateTime.ToString("MMM")
+                    </div>
+                    <div class="day-and-year">
+                        <div class="day">
+                            @teamup.DateTime.ToString("d ")
+                        </div>
+                        <div class="year">
+                            @teamup.DateTime.ToString("yyyy")
+                        </div>
+                    </div>
+                </div>
+                <div class="details">
+                    <div class="type">
+                        @teamup.DevelopmentType.Name
+                    </div>
+                    <div class="language">
+                        With @teamup.DevelopmentLanguage.Name
+
+                    </div>
+                    <div class="address">
+                        @teamup.Address
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="link-buttons">
+                <span>
+                    <button class="btn btn-link btn-sm">Delete</button>
+
+                </span>
+                <span>
+                    <button class="btn btn-link btn-sm pull-right">Edit</button>
+                </span>
+            </div>
+        </li>
+    }
+</ul>

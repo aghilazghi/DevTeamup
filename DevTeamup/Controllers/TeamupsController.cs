@@ -17,6 +17,42 @@ namespace DevTeamup.Controllers
         }
 
         [Authorize]
+        public ActionResult Mine()
+        {
+            var currentUserId = User.Identity.GetUserId();
+            var teamups = _context.Teamups
+                .Where(t => t.OrganizerId == currentUserId)
+                .Include(t => t.Organizer)
+                .Include(t => t.DevelopmentLanguage)
+                .Include(t => t.DevelopmentType)
+                .ToList();
+
+            return View(teamups);
+        }
+
+        [Authorize]
+        public ActionResult Favoring()
+        {
+            var currentUserId = User.Identity.GetUserId();
+            var teamups = _context.Favorites
+                .Where(c => c.FavoringUserId == currentUserId)
+                .Select(c => c.Teamup)
+                .Include(c => c.Organizer)
+                .Include(c => c.DevelopmentLanguage)
+                .Include(c => c.DevelopmentType)
+                .ToList();
+
+            var viewModel = new TeamupsViewModel
+            {
+                FutureTeamups = teamups,
+                IsAuthenticated = User.Identity.IsAuthenticated,
+                CurrentUserId = currentUserId,
+                Title = "My Favorite Teamups"
+            };
+            return View("Teamups", viewModel);
+        }
+
+        [Authorize]
         public ActionResult Contributing()
         {
             var currentUserId = User.Identity.GetUserId();
@@ -77,7 +113,7 @@ namespace DevTeamup.Controllers
             _context.Teamups.Add(teamup);
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Mine", "Teamups");
         }
     }
 }
