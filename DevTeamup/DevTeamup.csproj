@@ -212,6 +212,14 @@
     <Compile Include="Migrations\201705051738404_CreateFavoriteTable.Designer.cs">
       <DependentUpon>201705051738404_CreateFavoriteTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705082159380_AddIsCanceledToTeamup.cs" />
+    <Compile Include="Migrations\201705082159380_AddIsCanceledToTeamup.Designer.cs">
+      <DependentUpon>201705082159380_AddIsCanceledToTeamup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705082204438_CorrectTypoOfIsCancelledProperty.cs" />
+    <Compile Include="Migrations\201705082204438_CorrectTypoOfIsCancelledProperty.Designer.cs">
+      <DependentUpon>201705082204438_CorrectTypoOfIsCancelledProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Collaboration.cs" />
@@ -333,6 +341,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705051738404_CreateFavoriteTable.resx">
       <DependentUpon>201705051738404_CreateFavoriteTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705082159380_AddIsCanceledToTeamup.resx">
+      <DependentUpon>201705082159380_AddIsCanceledToTeamup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705082204438_CorrectTypoOfIsCancelledProperty.resx">
+      <DependentUpon>201705082204438_CorrectTypoOfIsCancelledProperty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

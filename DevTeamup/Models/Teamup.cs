@@ -32,5 +32,8 @@ namespace DevTeamup.Models
         [StringLength(1024)]
         public string Description { get; set; }
 
+        public bool IsCancelled { get; set; }
+
+
     }
 }
