@@ -7,6 +7,8 @@ namespace DevTeamup.ViewModels
 {
     public class TeamupFormViewModel
     {
+        public int Id { get; set; }
+
         [Required]
         public string Address { get; set; }
 
@@ -31,9 +33,13 @@ namespace DevTeamup.ViewModels
         [Display(Name = "Development Type")]
         public byte DevelopmentType { get; set; }
 
+        public string Title { get; set; }
+
         public IEnumerable<DevelopmentLanguage> DevelopmentLanguages { get; set; }
 
         public IEnumerable<DevelopmentType> DevelopmentTypes { get; set; }
+
+        public string Action => Id != 0 ? "Update" : "Create";
 
         public DateTime GetDateTime()
         {

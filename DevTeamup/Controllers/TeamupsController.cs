@@ -81,10 +81,34 @@ namespace DevTeamup.Controllers
             var viewModel = new TeamupFormViewModel
             {
                 DevelopmentLanguages = _context.DevelopmentLanguages.ToList(),
-                DevelopmentTypes = _context.DevelopmentTypes.ToList()
+                DevelopmentTypes = _context.DevelopmentTypes.ToList(),
+                Title = "Create a Teamup"
             };
 
-            return View(viewModel);
+            return View("TeamupForm", viewModel);
+        }
+
+        [Authorize]
+        public ActionResult Edit(int id)
+        {
+            var currentUserId = User.Identity.GetUserId();
+            var teamup = _context.Teamups.Single(t => t.Id == id && t.OrganizerId == currentUserId);
+
+            var viewModel = new TeamupFormViewModel
+            {
+                DevelopmentLanguages = _context.DevelopmentLanguages.ToList(),
+                DevelopmentTypes = _context.DevelopmentTypes.ToList(),
+                Date = teamup.DateTime.ToString("MMM d yyyy"),
+                Time = teamup.DateTime.ToString("HH:mm"),
+                Address = teamup.Address,
+                DevelopmentLanguage = teamup.DevelopmentLanguageId,
+                DevelopmentType = teamup.DevelopmentTypeId,
+                Description = teamup.Description,
+                Id = teamup.Id,
+                Title = "Update a Teamup"
+            };
+
+            return View("TeamupForm", viewModel);
         }
 
         [Authorize]
@@ -97,7 +121,7 @@ namespace DevTeamup.Controllers
                 viewModel.DevelopmentLanguages = _context.DevelopmentLanguages.ToList();
                 viewModel.DevelopmentTypes = _context.DevelopmentTypes.ToList();
 
-                return View("Create", viewModel);
+                return View("TeamupForm", viewModel);
             }
 
             var teamup = new Teamup
@@ -111,6 +135,34 @@ namespace DevTeamup.Controllers
             };
 
             _context.Teamups.Add(teamup);
+            _context.SaveChanges();
+
+            return RedirectToAction("Mine", "Teamups");
+        }
+
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Update(TeamupFormViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                viewModel.DevelopmentLanguages = _context.DevelopmentLanguages.ToList();
+                viewModel.DevelopmentTypes = _context.DevelopmentTypes.ToList();
+
+                return View("TeamupForm", viewModel);
+            }
+
+            var currentUserId = User.Identity.GetUserId();
+            var teamup = _context.Teamups.Single(t => t.Id == viewModel.Id && t.OrganizerId == currentUserId);
+
+            teamup.Address = viewModel.Address;
+            teamup.DateTime = viewModel.GetDateTime();
+            teamup.Description = viewModel.Description;
+            teamup.DevelopmentLanguageId = viewModel.DevelopmentLanguage;
+            teamup.DevelopmentTypeId = viewModel.DevelopmentType;
+
             _context.SaveChanges();
 
             return RedirectToAction("Mine", "Teamups");

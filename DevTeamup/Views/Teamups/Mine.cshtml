@@ -43,11 +43,13 @@
 
             <div class="link-buttons">
                 <span>
-                    <button class="btn btn-link btn-sm">Delete</button>
+                    <a href="@Url.Action("Edit", "Teamups", new {id = teamup.Id})" class="edit">
+                        Edit
+                    </a>
 
                 </span>
                 <span>
-                    <button class="btn btn-link btn-sm pull-right">Edit</button>
+                    <button class="btn btn-link btn-sm pull-right">Delete</button>
                 </span>
             </div>
         </li>

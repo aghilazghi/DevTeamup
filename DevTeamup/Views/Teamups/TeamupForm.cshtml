@@ -1,18 +1,20 @@
 ﻿@model DevTeamup.ViewModels.TeamupFormViewModel
 @{
-    ViewBag.Title = "Create Teamup";
+    ViewBag.Title = @Model.Title;
 }
 
 <div class="col-md-offset-2 col-md-10">
-    <h3>Create Teamup</h3>
+    <h3>@Model.Title</h3>
     <p class="required">All fields are required</p>
     <hr />
 </div>
 
 
-@using (Html.BeginForm("Create", "Teamups", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm(Model.Action, "Teamups", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => m.Id)
 
     <div class="form-group">
         @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
