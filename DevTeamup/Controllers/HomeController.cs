@@ -1,10 +1,10 @@
 ﻿using DevTeamup.Models;
 using DevTeamup.ViewModels;
-using System;
-using System.Linq;
-using System.Data.Entity;
-using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using System;
+using System.Data.Entity;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace DevTeamup.Controllers
 {
@@ -24,7 +24,7 @@ namespace DevTeamup.Controllers
                 .Include(t => t.Organizer)
                 .Include(t => t.DevelopmentLanguage)
                 .Include(t => t.DevelopmentType)
-                .Where(t => t.DateTime > DateTime.Now && !t.IsCancelled)
+                .Where(t => t.DateTime > DateTime.Now && !t.IsCanceled)
                 .OrderBy(t => t.DateTime)
                 .ToList();
 

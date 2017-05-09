@@ -221,6 +221,10 @@
     <Compile Include="Migrations\201705082204438_CorrectTypoOfIsCancelledProperty.Designer.cs">
       <DependentUpon>201705082204438_CorrectTypoOfIsCancelledProperty.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705092002455_AddNotification.cs" />
+    <Compile Include="Migrations\201705092002455_AddNotification.Designer.cs">
+      <DependentUpon>201705092002455_AddNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Collaboration.cs" />
@@ -228,12 +232,16 @@
     <Compile Include="Models\DevelopmentType.cs" />
     <Compile Include="Models\Favorite.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\NotificationType.cs" />
     <Compile Include="Models\Teamup.cs" />
+    <Compile Include="Models\UserNotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\ConfigureTwoFactorViewModel.cs" />
+    <Compile Include="ViewModels\CrudAction.cs" />
     <Compile Include="ViewModels\DateFormatValidation.cs" />
     <Compile Include="ViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="ViewModels\ExternalLoginListViewModel.cs" />
@@ -356,6 +364,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705082204438_CorrectTypoOfIsCancelledProperty.resx">
       <DependentUpon>201705082204438_CorrectTypoOfIsCancelledProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705092002455_AddNotification.resx">
+      <DependentUpon>201705092002455_AddNotification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

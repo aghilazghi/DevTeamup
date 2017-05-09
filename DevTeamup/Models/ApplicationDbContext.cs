@@ -13,6 +13,8 @@ namespace DevTeamup.Models
         public DbSet<DevelopmentLanguage> DevelopmentLanguages { get; set; }
         public DbSet<Collaboration> Collaborations { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<UserNotification> UserNotifications { get; set; }
         
 
         public ApplicationDbContext()
@@ -36,6 +38,11 @@ namespace DevTeamup.Models
 
             modelBuilder.Entity<Favorite>()
                 .HasRequired(a => a.Teamup)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<UserNotification>()
+                .HasRequired(n => n.User)
                 .WithMany()
                 .WillCascadeOnDelete(false);
 

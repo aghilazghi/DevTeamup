@@ -1,7 +1,7 @@
-﻿using System;
+﻿using DevTeamup.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using DevTeamup.Models;
 
 namespace DevTeamup.ViewModels
 {
@@ -39,11 +39,12 @@ namespace DevTeamup.ViewModels
 
         public IEnumerable<DevelopmentType> DevelopmentTypes { get; set; }
 
-        public string Action => Id != 0 ? "Update" : "Create";
+        public string Action => Id != 0 ? CrudAction.Update : CrudAction.Create;
 
         public DateTime GetDateTime()
         {
             return DateTime.Parse($"{Date} {Time}");
         }
     }
+
 }

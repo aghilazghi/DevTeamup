@@ -21,7 +21,7 @@ namespace DevTeamup.Controllers
         {
             var currentUserId = User.Identity.GetUserId();
             var teamups = _context.Teamups
-                .Where(t => t.OrganizerId == currentUserId && !t.IsCancelled)
+                .Where(t => t.OrganizerId == currentUserId && !t.IsCanceled)
                 .Include(t => t.Organizer)
                 .Include(t => t.DevelopmentLanguage)
                 .Include(t => t.DevelopmentType)
