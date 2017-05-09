@@ -1,7 +1,7 @@
-﻿using System.Data.Entity;
-using DevTeamup.Models;
+﻿using DevTeamup.Models;
 using DevTeamup.ViewModels;
 using Microsoft.AspNet.Identity;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -21,7 +21,7 @@ namespace DevTeamup.Controllers
         {
             var currentUserId = User.Identity.GetUserId();
             var teamups = _context.Teamups
-                .Where(t => t.OrganizerId == currentUserId)
+                .Where(t => t.OrganizerId == currentUserId && !t.IsCancelled)
                 .Include(t => t.Organizer)
                 .Include(t => t.DevelopmentLanguage)
                 .Include(t => t.DevelopmentType)

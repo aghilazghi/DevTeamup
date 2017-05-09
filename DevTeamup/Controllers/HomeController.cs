@@ -24,7 +24,7 @@ namespace DevTeamup.Controllers
                 .Include(t => t.Organizer)
                 .Include(t => t.DevelopmentLanguage)
                 .Include(t => t.DevelopmentType)
-                .Where(t => t.DateTime > DateTime.Now)
+                .Where(t => t.DateTime > DateTime.Now && !t.IsCancelled)
                 .OrderBy(t => t.DateTime)
                 .ToList();
 

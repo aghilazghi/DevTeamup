@@ -203,7 +203,11 @@ h6,
 
 .teamups > li .link-buttons {
     background: #CFD8DC;
-    padding: 5px 5px 5px 60px; 
+    padding: 5px 5px 5px 70px; 
+}
+
+.teamups > li .link-buttons .cancel > a {
+    color: red;
 }
 
 .teamups > li .right-padding {

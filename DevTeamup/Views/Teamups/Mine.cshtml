@@ -44,14 +44,63 @@
             <div class="link-buttons">
                 <span>
                     <a href="@Url.Action("Edit", "Teamups", new {id = teamup.Id})" class="edit">
-                        Edit
+                        Edit |
                     </a>
 
                 </span>
-                <span>
-                    <button class="btn btn-link btn-sm pull-right">Delete</button>
+                <span class="cancel">
+                    <a href="#" class="js-cancel-teamup" data-teamup-id="@teamup.Id">
+                        Cancel
+                    </a>
                 </span>
             </div>
         </li>
     }
 </ul>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $(".js-cancel-teamup").click(function(e) {
+                var eventSource = $(e.target);
+
+                bootbox.dialog({
+                    message: "Are you sure you want to cancel this teamup?",
+                    title: "Confirm",
+                    buttons: {
+                        no: {
+                            label: "No",
+                            className: "btn-default",
+                            callback: function () {
+                                bootbox.hideAll();
+                            }
+                        },
+                        yes: {
+                            label: "Yes",
+                            className: "btn-danger",
+                            callback: function () {
+                                $.ajax({
+                                    url: "/api/teamups/" + eventSource.attr("data-teamup-id"),
+                                        method: "DELETE"
+                                    })
+                                    .done(function () {
+                                        eventSource.parents("li").fadeOut(function () {
+                                            $(this).remove();
+                                            toastr.success("The teamup has been Cancelled successfully.");
+                                        });
+                                    })
+                                    .fail(function () {
+                                        toastr.error("There was an error handling your request!");
+                                    });
+                            }
+                        }
+                    }
+                });
+               
+            });
+
+        });
+       
+    </script>
+}

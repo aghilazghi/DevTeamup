@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Web.Http;
 using DevTeamup.Dtos;
 using DevTeamup.Models;
 using Microsoft.AspNet.Identity;
 
-namespace DevTeamup.Controllers
+namespace DevTeamup.Controllers.Api
 {
     public class FavoritesController : ApiController
     {
