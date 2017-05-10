@@ -155,13 +155,11 @@ namespace DevTeamup.Controllers
             }
 
             var currentUserId = User.Identity.GetUserId();
-            var teamup = _context.Teamups.Single(t => t.Id == viewModel.Id && t.OrganizerId == currentUserId);
+            var teamup = _context.Teamups
+                .Include(t => t.Collaborations.Select(c => c.Contributor))
+                .Single(t => t.Id == viewModel.Id && t.OrganizerId == currentUserId);
 
-            teamup.Address = viewModel.Address;
-            teamup.DateTime = viewModel.GetDateTime();
-            teamup.Description = viewModel.Description;
-            teamup.DevelopmentLanguageId = viewModel.DevelopmentLanguage;
-            teamup.DevelopmentTypeId = viewModel.DevelopmentType;
+            teamup.Modify(viewModel);
 
             _context.SaveChanges();
 

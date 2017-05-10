@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevTeamup.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
@@ -48,11 +49,25 @@ namespace DevTeamup.Models
         {
             IsCanceled = true;
 
-            foreach (var contributor in Collaborations.Select(c => c.Contributor))
-            {
-                contributor.Notify(new Notification(this, NotificationType.TeamupCanceled));
+            var notification = Notification.TeamupCanceled(this);
 
-            }
+            foreach (var contributor in Collaborations.Select(c => c.Contributor))
+                contributor.Notify(notification);
+
+        }
+
+        public void Modify(TeamupFormViewModel viewModel)
+        {
+            var notification = Notification.TeamupModified(this, DateTime, Address);
+
+            Address = viewModel.Address;
+            DateTime = viewModel.GetDateTime();
+            Description = viewModel.Description;
+            DevelopmentLanguageId = viewModel.DevelopmentLanguage;
+            DevelopmentTypeId = viewModel.DevelopmentType;
+
+            foreach (var contributor in Collaborations.Select(c => c.Contributor))
+                contributor.Notify(notification);         
         }
     }
 }
