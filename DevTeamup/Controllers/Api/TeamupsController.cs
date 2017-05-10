@@ -1,6 +1,6 @@
 ﻿using DevTeamup.Models;
 using Microsoft.AspNet.Identity;
-using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 
@@ -20,34 +20,16 @@ namespace DevTeamup.Controllers.Api
         public IHttpActionResult Cancel(int id)
         {
             var currentUserId = User.Identity.GetUserId();
-            var teamup = _context.Teamups.Single(t => t.Id == id && t.OrganizerId == currentUserId);
+            var teamup = _context.Teamups
+                .Include(t => t.Collaborations.Select(c => c.Contributor))
+                .Single(t => t.Id == id && t.OrganizerId == currentUserId);
 
             if (teamup.IsCanceled)
                 return NotFound();
 
-            teamup.IsCanceled = true;
+            teamup.Cancel();
 
-            var notification = new Notification
-            {
-                DateTime = DateTime.Now,
-                Teamup = teamup,
-                NotificationType = NotificationType.TeamupCanceled
-            };
-
-            var contributors = _context.Collaborations
-                .Where(c => c.TeamupId == teamup.Id)
-                .Select(c => c.Contributor)
-                .ToList();
-
-            foreach (var contributor in contributors)
-            {
-                var userNotification = new UserNotification
-                {
-                    User = contributor,
-                    Notification = notification
-                };
-                _context.UserNotifications.Add(userNotification);
-            }           
+           
 
             _context.SaveChanges();
 

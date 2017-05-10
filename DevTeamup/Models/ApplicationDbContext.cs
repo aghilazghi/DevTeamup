@@ -33,7 +33,7 @@ namespace DevTeamup.Models
 
             modelBuilder.Entity<Collaboration>()
                 .HasRequired(a => a.Teamup)
-                .WithMany()
+                .WithMany(t => t.Collaborations)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Favorite>()
@@ -42,8 +42,8 @@ namespace DevTeamup.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<UserNotification>()
-                .HasRequired(n => n.User)
-                .WithMany()
+                .HasRequired(u => u.User)
+                .WithMany(a => a.UserNotifications)
                 .WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);

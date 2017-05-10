@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace DevTeamup.Models
 {
@@ -32,8 +35,24 @@ namespace DevTeamup.Models
         [StringLength(1024)]
         public string Description { get; set; }
 
-        public bool IsCanceled { get; set; }
+        public bool IsCanceled { get; private set; }
 
+        public ICollection<Collaboration> Collaborations { get; private set; }
 
+        public Teamup()
+        {
+            Collaborations = new Collection<Collaboration>();
+        }
+
+        public void Cancel()
+        {
+            IsCanceled = true;
+
+            foreach (var contributor in Collaborations.Select(c => c.Contributor))
+            {
+                contributor.Notify(new Notification(this, NotificationType.TeamupCanceled));
+
+            }
+        }
     }
 }
