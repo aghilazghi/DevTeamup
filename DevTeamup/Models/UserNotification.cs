@@ -38,5 +38,9 @@ namespace DevTeamup.Models
             
         }
 
+        public void Read()
+        {
+            IsRead = true;
+        }
     }
 }

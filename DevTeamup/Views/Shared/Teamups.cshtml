@@ -74,9 +74,11 @@
                             .removeClass("btn-default")
                             .addClass("btn-success")
                             .text("Joined");
+                        toastr.success("You have joined this teamup successfully!");
+
                     })
                     .fail(function() {
-                        alert("Something failed!");
+                        toastr.error("There was an error handling your request!");
                     });
             });
 
@@ -85,9 +87,10 @@
                 $.post("/api/favorites", { teamupId: buttonEvent.attr("data-teamup-id") })
                     .done(function () {
                         buttonEvent.text("Marked as your favorite");
+                        toastr.success("This teamup is marked as your favorite!");
                     })
                     .fail(function () {
-                        alert("Something failed");
+                        toastr.error("There was an error handling your request!");
                     });
             });
         });
