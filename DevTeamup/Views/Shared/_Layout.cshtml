@@ -41,11 +41,11 @@
     @RenderSection("scripts", required: false)
 
 <script type="text/x-underscore-template" id="notifications-template">
-    <ul>
+    <ul class="notifications">
         <%
             _.each(notifications, function(notification) {
                 if(notification.notificationType == 3) { %>
-                <li><%= notification.teamup.organizer.firstName %> has canceled the teamup at <%= notification.teamup.address %> at <%= notification.teamup.dateTime %></li>
+                <li><span class="bold-highlight"><%= notification.teamup.organizer.firstName %> <%= notification.teamup.organizer.lastName %></span>  has canceled the teamup at <span class="italic-highlight"><%= notification.teamup.address %></span> on <span class="highlight"> <%= moment(notification.teamup.dateTime).format("MMM D YYYY hh:mm A") %></span></li>
                 <%}
 
                 else if (notification.notificationType == 2) {
@@ -55,8 +55,8 @@
 
                     if (notification.originalDateTime != notification.teamup.dateTime) {
                         changes.push('date/time');
-                        originalValues.push(notification.originalDateTime);
-                        newValues.push(notification.teamup.dateTime);
+                        originalValues.push(moment(notification.originalDateTime).format("MMM D YYYY hh:mm A"));
+                        newValues.push(moment(notification.teamup.dateTime).format("MMM D YYYY hh:mm A"));
                     }
         
                     if (notification.originalAddress != notification.teamup.address) {
@@ -65,7 +65,7 @@
                         newValues.push(notification.teamup.address);
                     }
                     %>
-                        <li> <%= notification.teamup.organizer.firstName %> has changed the <%= changes.join(' and ') %> of the teamup from <%= originalValues.join(' / ') %> to <%= newValues.join(' / ') %></li>
+                        <li> <span class="bold-highlight"><%= notification.teamup.organizer.firstName %> <%= notification.teamup.organizer.lastName %></span>  has changed the <span class="italic-highlight"><%= changes.join(' and ') %></span> of the teamup from <span class="italic-highlight"><%= originalValues.join(' / ') %></span> to <span class="bold-highlight"><%= newValues.join(' / ') %></span></li>
                     <%
                 }
 
@@ -93,7 +93,8 @@
                         var compiled = _.template($("#notifications-template").html());
                         return  compiled({ notifications: notifications });
                     },
-                    placement: "bottom"
+                    placement: "bottom",
+                    template: '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
                 });
 
             });

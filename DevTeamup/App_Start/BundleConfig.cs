@@ -10,6 +10,7 @@ namespace DevTeamup
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/underscore.js",
+                        "~/Scripts/moment.js",
                         "~/Scripts/toastr.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(

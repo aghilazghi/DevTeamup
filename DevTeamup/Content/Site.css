@@ -111,6 +111,10 @@ footer {
     border-color: #607D8B;
 }
 
+.popover {
+    box-shadow: none;
+}
+
 .form-group {
     margin-bottom: 17px;
 }
@@ -227,3 +231,41 @@ h6,
 .teamups > li .right-padding {
     padding: 0 40px 0 0;
 }
+
+.popover-notifications .popover-title {
+    font-weight: 700;
+    color: #455A64;
+    font-size: 17px;
+}
+
+.popover-notifications .popover-content {
+    padding: 0;
+}
+
+
+.popover-notifications ul.notifications {
+    list-style: none;
+    padding: 0;
+    margin-right: 0;
+}
+
+.popover-notifications ul.notifications > li {
+    border-bottom: 1px solid #455A64;
+    padding: 10px;
+}
+
+.popover-notifications ul.notifications > li:last-child {
+    border-bottom: none;
+}
+
+.popover-notifications ul.notifications > li .bold-highlight {
+    font-weight: 600;
+    color:  #455A64;
+}
+
+.popover-notifications ul.notifications > li .italic-highlight {
+    font-weight: 500;
+    font-style: italic;
+    color:  #455A64;
+}
+
