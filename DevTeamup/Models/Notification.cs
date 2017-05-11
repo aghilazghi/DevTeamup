@@ -9,7 +9,7 @@ namespace DevTeamup.Models
         public DateTime DateTime { get; private set; }
         public NotificationType NotificationType { get; private set; }
         public DateTime? OriginalDateTime { get; private set; }
-        public string OriginalAdsress { get; private set; }
+        public string OriginalAddress { get; private set; }
 
         [Required]
         public Teamup Teamup { get; private set; }
@@ -39,7 +39,7 @@ namespace DevTeamup.Models
             var notification = new Notification(newTeamup, NotificationType.TeamupUpdated)
             {
                     OriginalDateTime = originalDateTime,
-                    OriginalAdsress = originalAddress
+                    OriginalAddress = originalAddress
             };
 
             return notification;
