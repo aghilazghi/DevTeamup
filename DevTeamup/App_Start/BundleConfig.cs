@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace DevTeamup
 {
@@ -10,6 +9,7 @@ namespace DevTeamup
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/underscore.js",
                         "~/Scripts/toastr.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -27,8 +27,10 @@ namespace DevTeamup
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css",
-                      "~/Content/toastr.min.css"));
+                      "~/Content/animate.css",
+                      "~/Content/toastr.min.css",
+                      "~/Content/site.css"
+                      ));
         }
     }
 }

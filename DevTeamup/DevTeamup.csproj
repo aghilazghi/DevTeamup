@@ -279,6 +279,8 @@
     <Compile Include="ViewModels\VerifyPhoneNumberViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate.css" />
+    <Content Include="Content\animate.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\toastr.css" />
@@ -306,6 +308,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

@@ -39,5 +39,67 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+<script type="text/x-underscore-template" id="notifications-template">
+    <ul>
+        <%
+            _.each(notifications, function(notification) {
+                if(notification.notificationType == 3) { %>
+                <li><%= notification.teamup.organizer.firstName %> has canceled the teamup at <%= notification.teamup.address %> at <%= notification.teamup.dateTime %></li>
+                <%}
+
+                else if (notification.notificationType == 2) {
+                    var changes = [],
+                        originalValues = [],
+                        newValues = [];
+
+                    if (notification.originalDateTime != notification.teamup.dateTime) {
+                        changes.push('date/time');
+                        originalValues.push(notification.originalDateTime);
+                        newValues.push(notification.teamup.dateTime);
+                    }
+        
+                    if (notification.originalAddress != notification.teamup.address) {
+                        changes.push('address');
+                        originalValues.push(notification.originalAddress);
+                        newValues.push(notification.teamup.address);
+                    }
+                    %>
+                        <li> <%= notification.teamup.organizer.firstName %> has changed the <%= changes.join(' and ') %> of the teamup from <%= originalValues.join(' / ') %> to <%= newValues.join(' / ') %></li>
+                    <%
+                }
+
+                })
+        %>
+    </ul>
+</script>
+<script>
+    $(document).ready(function() {
+        $.getJSON("/api/notifications",
+            function (notifications) {
+
+                if (notifications.length == 0)
+                    return;
+
+                $(".js-notifications-count")
+                    .text(notifications.length)
+                    .removeClass("hide")
+                    .addClass("flip");
+
+                $(".notifications").popover({
+                    html: true,
+                    title: "Notifications",
+                    content: function () {
+                        var compiled = _.template($("#notifications-template").html());
+                        return  compiled({ notifications: notifications });
+                    },
+                    placement: "bottom"
+                });
+
+            });
+    });
+</script>
+    
+
 </body>
 </html>

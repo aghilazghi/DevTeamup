@@ -79,6 +79,20 @@ footer {
     font-size: 22px;
     font-weight: bold;
 }
+
+.navbar-inverse .notifications {
+    position: relative;
+    margin-right: 30px;
+}
+
+.navbar-inverse .notifications .badge{
+    position: absolute;
+    top: 6px;
+    right: -2px;
+    background-color: #B0BEC5;
+    color: #455A64;
+}
+
 .dropdown-menu {
     box-shadow: none;
 }
