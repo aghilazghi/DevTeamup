@@ -1,6 +1,8 @@
-﻿using DevTeamup.Migrations;
+﻿using System;
+using DevTeamup.Migrations;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
+using System.Linq;
 
 namespace DevTeamup.Models
 {
@@ -47,6 +49,33 @@ namespace DevTeamup.Models
                 .WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);
+        }
+
+        private void ApplyRules()
+        {
+            // Approach via @julielerman: http://bit.ly/123661P
+            foreach (var entry in ChangeTracker.Entries()
+                .Where(
+                    e => e.Entity is ITimeStamp &&
+                         (e.State == EntityState.Added) ||
+                         (e.State == EntityState.Modified)))
+            {
+                var e = (ITimeStamp)entry.Entity;
+
+                if (entry.State == EntityState.Added)
+                {
+                    e.CreatedOn = DateTime.Now;
+                }
+
+                e.ModifiedOn = DateTime.Now;
+            }
+        }
+
+        public override int SaveChanges()
+        {
+            ApplyRules();
+
+            return base.SaveChanges();
         }
     }
 }

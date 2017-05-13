@@ -44,7 +44,10 @@
         <%
             _.each(notifications, function(notification) {
                 if(notification.notificationType == 3) { %>
-                <li><span class="bold-highlight"><%= notification.teamup.organizer.firstName %> <%= notification.teamup.organizer.lastName %></span>  has canceled the teamup at <span class="italic-highlight"><%= notification.teamup.address %></span> on <span class="highlight"> <%= moment(notification.teamup.dateTime).format("MMM D YYYY hh:mm A") %></span></li>
+                    <li>
+                        <span class="bold-highlight"><%= notification.teamup.organizer.firstName %> <%= notification.teamup.organizer.lastName %></span>  has canceled the teamup at <span class="italic-highlight"><%= notification.teamup.address %></span> on <span class="highlight"> <%= moment(notification.teamup.dateTime).format("MMM D YYYY hh:mm A") %></span>
+                        <div class="italic-highlight color-highlight"><%= moment(notification.createdOn).fromNow() %></div>
+                    </li>
                 <%}
 
                 else if (notification.notificationType == 2) {
@@ -64,8 +67,11 @@
                         newValues.push(notification.teamup.address);
                     }
                     %>
-                        <li> <span class="bold-highlight"><%= notification.teamup.organizer.firstName %> <%= notification.teamup.organizer.lastName %></span>  has changed the <span class="italic-highlight"><%= changes.join(' and ') %></span> of the teamup from <span class="italic-highlight"><%= originalValues.join(' / ') %></span> to <span class="bold-highlight"><%= newValues.join(' / ') %></span></li>
-                    <%
+                    <li>
+                        <span class="bold-highlight"><%= notification.teamup.organizer.firstName %> <%= notification.teamup.organizer.lastName %></span>  has changed the <span class="italic-highlight"><%= changes.join(' and ') %></span> of the teamup from <span class="italic-highlight"><%= originalValues.join(' / ') %></span> to <span class="bold-highlight"><%= newValues.join(' / ') %></span>
+                        <div class="italic-highlight color-highlight"><%= moment(notification.createdOn).fromNow() %></div>
+                    </li>
+                <%
                 }
 
                 })
@@ -77,32 +83,48 @@
         $.getJSON("/api/notifications",
             function (notifications) {
 
-                if (notifications.length == 0)
-                    return;
+                if (notifications.unread == 0) {
 
-                $(".js-notifications-count")
-                    .text(notifications.length)
-                    .removeClass("hide")
-                    .addClass("flip");
+                    $(".js-notifications-count").text("").addClass("hide");
 
-                $(".notifications").popover({
-                    html: true,
-                    title: "Notifications",
-                    content: function () {
-                        var compiled = _.template($("#notifications-template").html());
-                        return  compiled({ notifications: notifications });
-                    },
-                    placement: "bottom",
-                    template: '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
-                }).on("shown.bs.popover", function() {
-                    $.post("/api/notifications/markAsRead")
-                        .done(function() {
-                            $(".js-notifications-count")
-                                .text("")
-                                .addClass("hide");
-                            toastr.success("Your notifications have been marked as read.");
-                        });
-                });
+                    $(".notifications").popover({
+                        html: true,
+                        title: "Notifications",
+                        content: function() {
+                            var compiled = _.template($("#notifications-template").html());
+                            return compiled({ notifications: notifications.all });
+                        },
+                        placement: "bottom",
+                        template:
+                            '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+                    });
+
+                } else {
+
+                    $(".js-notifications-count")
+                        .text(notifications.unread)
+                        .removeClass("hide")
+                        .addClass("flip");
+
+                    $(".notifications").popover({
+                        html: true,
+                        title: "Notifications",
+                        content: function () {
+                            var compiled = _.template($("#notifications-template").html());
+                            return compiled({ notifications: notifications });
+                        },
+                        placement: "bottom",
+                        template: '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+                    }).on("shown.bs.popover", function () {
+                        $.post("/api/notifications/markAsRead")
+                            .done(function () {
+                                $(".js-notifications-count")
+                                    .text("")
+                                    .addClass("hide");
+                                toastr.success("Your notifications have been marked as read.");
+                            });
+                    });
+                }               
 
             });
     });

@@ -3,13 +3,21 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DevTeamup.Models
 {
-    public class Notification
+    public class Notification : ITimeStamp
     {
         public int Id { get; private set; }
+
         public DateTime DateTime { get; private set; }
+
         public NotificationType NotificationType { get; private set; }
+
         public DateTime? OriginalDateTime { get; private set; }
+
         public string OriginalAddress { get; private set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public DateTime ModifiedOn { get; set; }
 
         [Required]
         public Teamup Teamup { get; private set; }
@@ -49,5 +57,6 @@ namespace DevTeamup.Models
         {
             
         }
+
     }
 }

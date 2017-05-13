@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using DevTeamup.Dtos;
 using DevTeamup.Models;
 using System.Collections.Generic;
@@ -19,17 +20,32 @@ namespace DevTeamup.Controllers.Api
             _context = new ApplicationDbContext();  
         }
 
-        public IEnumerable<NotificationDto> GetNewNotifications()
+        public NotificationResultDto GetNewNotifications()
         {
             var currentUserId = User.Identity.GetUserId();
+            var today = DateTime.Now;
 
-            var notifications = _context.UserNotifications
-                .Where(u => u.UserId == currentUserId && !u.IsRead)
+            var userNotifications = _context.UserNotifications
+                .Where(u => u.UserId == currentUserId);
+
+            var unreadNotifications = userNotifications
+                .Where(u => !u.IsRead)
+                .ToList()
+                .Count;     
+
+            var notifications = userNotifications
                 .Select(u => u.Notification)
                 .Include(n => n.Teamup.Organizer)
+                .Where(n => DbFunctions.DiffDays(n.CreatedOn, today) <= 30)
                 .ToList();
 
-            return notifications.Select(Mapper.Map<Notification, NotificationDto>);
+            var notificationResultDto = new NotificationResultDto
+            {
+                Unread = unreadNotifications,
+                All = notifications.Select(Mapper.Map<Notification, NotificationDto>)
+            };
+
+            return notificationResultDto;
         }
 
         [HttpPost]

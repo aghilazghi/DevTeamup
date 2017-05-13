@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace DevTeamup.Models
 {
-    public class Teamup
+    public class Teamup : ITimeStamp
     {
         public int Id { get; set; }
 
@@ -37,6 +37,10 @@ namespace DevTeamup.Models
         public string Description { get; set; }
 
         public bool IsCanceled { get; private set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public DateTime ModifiedOn { get; set; }
 
         public ICollection<Collaboration> Collaborations { get; private set; }
 

@@ -6,10 +6,18 @@ namespace DevTeamup.Dtos
     public class NotificationDto
     {
         public DateTime DateTime { get; set; }
+
         public NotificationType NotificationType { get; set; }
+
         public DateTime? OriginalDateTime { get; set; }
+
         public string OriginalAddress { get; set; }
+
         public TeamupDto Teamup { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public DateTime ModifiedOn { get; set; }
 
     }
 }

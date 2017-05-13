@@ -196,6 +196,7 @@
     <Compile Include="Dtos\DevelopmentTypeDto.cs" />
     <Compile Include="Dtos\FavoriteDto.cs" />
     <Compile Include="Dtos\NotificationDto.cs" />
+    <Compile Include="Dtos\NotificationResultDto.cs" />
     <Compile Include="Dtos\TeamupDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -240,6 +241,10 @@
     <Compile Include="Migrations\201705101713002_FixOriginalAddressPropertyTypo.Designer.cs">
       <DependentUpon>201705101713002_FixOriginalAddressPropertyTypo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705121343294_AddCreatedOnAndModifiedOnPropertiesToTeamupNotificationAndUserNotification.cs" />
+    <Compile Include="Migrations\201705121343294_AddCreatedOnAndModifiedOnPropertiesToTeamupNotificationAndUserNotification.Designer.cs">
+      <DependentUpon>201705121343294_AddCreatedOnAndModifiedOnPropertiesToTeamupNotificationAndUserNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Collaboration.cs" />
@@ -247,6 +252,7 @@
     <Compile Include="Models\DevelopmentType.cs" />
     <Compile Include="Models\Favorite.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\ITimeStamp.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\NotificationType.cs" />
     <Compile Include="Models\Teamup.cs" />
@@ -392,6 +398,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705101713002_FixOriginalAddressPropertyTypo.resx">
       <DependentUpon>201705101713002_FixOriginalAddressPropertyTypo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705121343294_AddCreatedOnAndModifiedOnPropertiesToTeamupNotificationAndUserNotification.resx">
+      <DependentUpon>201705121343294_AddCreatedOnAndModifiedOnPropertiesToTeamupNotificationAndUserNotification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

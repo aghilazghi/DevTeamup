@@ -234,7 +234,7 @@ h6,
 
 .popover-notifications .popover-title {
     font-weight: 700;
-    color: #455A64;
+    color:  #64B5F6;
     font-size: 17px;
 }
 
@@ -267,5 +267,10 @@ h6,
     font-weight: 500;
     font-style: italic;
     color:  #455A64;
+}
+
+.popover-notifications ul.notifications > li .color-highlight {
+    color: #64B5F6;
+    font-size: 13px;
 }
 

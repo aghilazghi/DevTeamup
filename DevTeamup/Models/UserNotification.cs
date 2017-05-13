@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DevTeamup.Models
 {
-    public class UserNotification
+    public class UserNotification : ITimeStamp
     {
 
         [Key]
@@ -20,6 +20,10 @@ namespace DevTeamup.Models
         public Notification Notification { get; private set; }
 
         public bool IsRead { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public DateTime ModifiedOn { get; set; }
 
         public UserNotification(ApplicationUser user, Notification notification)
         {
