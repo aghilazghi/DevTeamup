@@ -12,5 +12,6 @@ namespace DevTeamup.ViewModels
         public bool IsAuthenticated { get; set; }
         public string CurrentUserId { get; set; }
         public string Title { get; set; }
+        public string SearchTerm { get; set; }
     }
 }

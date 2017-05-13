@@ -69,10 +69,16 @@ namespace DevTeamup.Controllers
                 FutureTeamups = teamups,
                 IsAuthenticated = User.Identity.IsAuthenticated,
                 CurrentUserId = currentUserId,
-                Title = "Teamups I'm Contributing"
+                Title = "Teamups I'm Contributing",
             };
 
             return View("Teamups", viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Search(TeamupsViewModel viewModel)
+        {
+            return RedirectToAction("Index", "Home", new { query = viewModel.SearchTerm });
         }
 
         [Authorize]

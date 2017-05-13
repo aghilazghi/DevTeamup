@@ -17,23 +17,32 @@ namespace DevTeamup.Controllers
             _context = new ApplicationDbContext();
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string query = null)
         {
 
             var futureTeamups = _context.Teamups
                 .Include(t => t.Organizer)
                 .Include(t => t.DevelopmentLanguage)
                 .Include(t => t.DevelopmentType)
-                .Where(t => t.DateTime > DateTime.Now && !t.IsCanceled)
-                .OrderBy(t => t.DateTime)
-                .ToList();
+                .Where(t => t.DateTime > DateTime.Now && !t.IsCanceled);
+
+            if (!String.IsNullOrWhiteSpace(query))
+            {
+                futureTeamups = futureTeamups
+                    .Where(t =>
+                        t.Organizer.FirstName.Contains(query) ||
+                        t.Organizer.LastName.Contains(query) ||
+                        t.DevelopmentLanguage.Name.Contains(query) ||
+                        t.DevelopmentType.Name.Contains(query));
+            }
 
             var viewModel = new TeamupsViewModel
             {
                 FutureTeamups = futureTeamups,
                 IsAuthenticated = User.Identity.IsAuthenticated,
                 CurrentUserId = User.Identity.GetUserId(),
-                Title = "Future Teamups"
+                Title = "Future Teamups",
+                SearchTerm = query
             };
 
             return View("Teamups", viewModel);

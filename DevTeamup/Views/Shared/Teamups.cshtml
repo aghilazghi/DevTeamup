@@ -6,6 +6,18 @@
 
 <h3>@Model.Title</h3>
 <hr />
+@using (Html.BeginForm("Search", "Teamups"))
+{
+    <div class="form-group">
+        <div id="search-teamps" class="input-group">
+            @Html.TextBoxFor(m => m.SearchTerm, new {@class = "form-control", placeholder = "Search for organizer, language, type ..."})
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-search"></i>
+            </span>
+        </div>
+    </div>   
+}
+<hr />
 
 <ul class="teamups row">
     @foreach (var teamup in Model.FutureTeamups)
@@ -60,7 +72,7 @@
             }
 
         </li>
-    }
+        }
 </ul>
 
 @section scripts {
