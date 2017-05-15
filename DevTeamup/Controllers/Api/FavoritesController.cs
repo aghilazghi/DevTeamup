@@ -35,5 +35,22 @@ namespace DevTeamup.Controllers.Api
             return Ok();
         }
 
+        [HttpDelete]
+        public IHttpActionResult Remove(int id)
+        {
+            var currentUserId = User.Identity.GetUserId();
+
+            var favorite =
+                _context.Favorites.SingleOrDefault(f => f.TeamupId == id && f.FavoringUserId == currentUserId);
+
+            if (favorite == null)
+                return NotFound();
+
+            _context.Favorites.Remove(favorite);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
     }
 }

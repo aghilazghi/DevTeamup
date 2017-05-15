@@ -28,20 +28,20 @@
                 {
                     if (Model.IsContributing)
                     {
-                        <button class="btn btn-link js-toggle-collaboration">Joined</button>
+                        <button data-teamup-id ="@Model.Teamup.Id" class="btn btn-success js-toggle-collaboration">Joined</button>
                     }
                     else
                     {
-                        <button class="btn btn-link js-toggle-collaboration">Join</button>
+                        <button data-teamup-id ="@Model.Teamup.Id" class="btn btn-info js-toggle-collaboration">Join</button>
                     }
 
                     if (Model.IsFavoring)
                     {
-                        <button class="btn btn-link js-toggle-favorite">Marked as your favorite</button>
+                        <button data-teamup-id ="@Model.Teamup.Id" class="btn btn-success js-toggle-favorite">Marked as your favorite</button>
                     }
                     else
                     {
-                        <button class="btn btn-link js-toggle-favorite">Mark as your favorite</button>
+                        <button data-teamup-id ="@Model.Teamup.Id" class="btn btn-info js-toggle-favorite">Mark as your favorite</button>
                     }
                 }
             </div>
@@ -57,28 +57,70 @@
         $(document).ready(function() {
             $(".js-toggle-collaboration").click(function(e) {
                 var buttonEvent = $(e.target);
-                $.post("/api/collaborations", { teamupId: buttonEvent.attr("data-teamup-id") })
-                    .done(function() {
-                        buttonEvent
-                            .text("Joined");
-                        toastr.success("You have joined this teamup successfully!");
+                if (buttonEvent.hasClass("btn-info")) {
+                    $.post("/api/collaborations", { teamupId: buttonEvent.attr("data-teamup-id") })
+                        .done(function() {
+                            buttonEvent
+                                .removeClass("btn-info")
+                                .addClass("btn-success")
+                                .text("Joined");
+                            toastr.success("You have joined this teamup successfully!");
 
-                    })
-                    .fail(function() {
-                        toastr.error("There was an error handling your request!");
-                    });
+                        })
+                        .fail(function() {
+                            toastr.error("There was an error handling your request!");
+                        });
+                } else {
+                    $.ajax({
+                            url: "/api/collaborations/" + buttonEvent.attr("data-teamup-id"),
+                            method: "DELETE"
+                        })
+                        .done(function() {
+                            buttonEvent
+                                .removeClass("btn-success")
+                                .addClass("btn-info")
+                                .text("Join");
+                            toastr.warning("You are no longer contributing to this teamup!");
+                        })
+                        .fail(function() {
+                            toastr.error("There was an error handling your request!");
+                        });
+                }
             });
 
             $(".js-toggle-favorite").click(function (e) {
                 var buttonEvent = $(e.target);
-                $.post("/api/favorites", { teamupId: buttonEvent.attr("data-teamup-id") })
-                    .done(function () {
-                        buttonEvent.text("Marked as your favorite");
-                        toastr.success("This teamup is marked as your favorite!");
-                    })
-                    .fail(function () {
-                        toastr.error("There was an error handling your request!");
-                    });
+
+                if (buttonEvent.hasClass("btn-info")) {
+                    $.post("/api/favorites", { teamupId: buttonEvent.attr("data-teamup-id") })
+                        .done(function() {
+                            buttonEvent
+                                .removeClass("btn-info")
+                                .addClass("btn-success")
+                                .text("Marked as your favorite");
+                            toastr.success("This teamup is marked as your favorite!");
+                        })
+                        .fail(function() {
+                            toastr.error("There was an error handling your request!");
+                        });
+
+                } else {
+
+                    $.ajax({
+                            url: "/api/favorites/" + buttonEvent.attr("data-teamup-id"),
+                            method: "DELETE"
+                        })
+                        .done(function () {
+                            buttonEvent
+                                .removeClass("btn-success")
+                                .addClass("btn-info")
+                                .text("Mark as your favorite");
+                            toastr.warning("You are no longer favoring this teamup!");
+                        })
+                        .fail(function () {
+                            toastr.error("There was an error handling your request!");
+                        });
+                }
             });
         });
     </script>

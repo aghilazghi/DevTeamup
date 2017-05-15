@@ -34,5 +34,22 @@ namespace DevTeamup.Controllers.Api
 
             return Ok();
         }
+
+        [HttpDelete]
+        public IHttpActionResult Remove(int id)
+        {
+            var currentUserId = User.Identity.GetUserId();
+
+            var collaboration =
+                _context.Collaborations.SingleOrDefault(c => c.TeamupId == id && c.ContributorId == currentUserId);
+
+            if (collaboration == null)
+                return NotFound();
+
+            _context.Collaborations.Remove(collaboration);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }
