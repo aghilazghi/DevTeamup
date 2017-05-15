@@ -270,6 +270,7 @@
     <Compile Include="ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="ViewModels\ForgotViewModel.cs" />
     <Compile Include="ViewModels\FutureDateValidation.cs" />
+    <Compile Include="ViewModels\TeamupDetailViewModel.cs" />
     <Compile Include="ViewModels\TeamupsViewModel.cs" />
     <Compile Include="ViewModels\IndexViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -356,6 +357,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Teamups\TeamupForm.cshtml" />
     <Content Include="Views\Teamups\Mine.cshtml" />
+    <Content Include="Views\Teamups\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

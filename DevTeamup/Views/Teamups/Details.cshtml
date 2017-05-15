@@ -1,0 +1,85 @@
+﻿@model DevTeamup.ViewModels.TeamupDetailViewModel
+@{
+    ViewBag.Title = "Details";
+}
+<div class="details">
+    <div class="row">
+        <div class="col-md-5 left-detail">
+            <div class="development-type">
+                @Model.Teamup.DevelopmentType.Name
+            </div>
+            <div class="development-language">
+                with  @Model.Teamup.DevelopmentLanguage.Name
+            </div>
+            <div class="organizer">
+                <span>Origanizer:</span> @Model.Teamup.Organizer.FirstName @Model.Teamup.Organizer.LastName
+            </div>
+            <div class="date-time">
+                <span>Date and Time:</span> @Model.Teamup.DateTime.ToString("MMMM d yyyy") at @Model.Teamup.DateTime.ToString("hh:mm tt")
+            </div>
+            <div class="address">
+                <span>Address:</span> @Model.Teamup.Address
+            </div>
+            <div class="description">
+                @Model.Teamup.Description
+            </div>
+            <div class="join-favor pull-right">
+                @if (User.Identity.IsAuthenticated && Model.CurrentUserId != Model.Teamup.OrganizerId)
+                {
+                    if (Model.IsContributing)
+                    {
+                        <button class="btn btn-link js-toggle-collaboration">Joined</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-link js-toggle-collaboration">Join</button>
+                    }
+
+                    if (Model.IsFavoring)
+                    {
+                        <button class="btn btn-link js-toggle-favorite">Marked as your favorite</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-link js-toggle-favorite">Mark as your favorite</button>
+                    }
+                }
+            </div>
+        </div>
+        <div class="col-md-7">
+            Map
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            $(".js-toggle-collaboration").click(function(e) {
+                var buttonEvent = $(e.target);
+                $.post("/api/collaborations", { teamupId: buttonEvent.attr("data-teamup-id") })
+                    .done(function() {
+                        buttonEvent
+                            .text("Joined");
+                        toastr.success("You have joined this teamup successfully!");
+
+                    })
+                    .fail(function() {
+                        toastr.error("There was an error handling your request!");
+                    });
+            });
+
+            $(".js-toggle-favorite").click(function (e) {
+                var buttonEvent = $(e.target);
+                $.post("/api/favorites", { teamupId: buttonEvent.attr("data-teamup-id") })
+                    .done(function () {
+                        buttonEvent.text("Marked as your favorite");
+                        toastr.success("This teamup is marked as your favorite!");
+                    })
+                    .fail(function () {
+                        toastr.error("There was an error handling your request!");
+                    });
+            });
+        });
+    </script>
+}

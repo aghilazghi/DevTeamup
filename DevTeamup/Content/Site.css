@@ -232,7 +232,7 @@ h6,
 }
 
 .teamups > li .link-buttons {
-    background: #CFD8DC;
+    background-color: #CFD8DC;
     padding: 5px 5px 5px 70px; 
 }
 
@@ -290,3 +290,60 @@ h6,
     width: 300px;
 }
 
+.details .left-detail {
+    background-color: #E0E0E0;
+    color: #455A64;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+
+.details .development-type {   
+    font-weight: 600;
+    font-size: 24px;
+}
+.details .development-language {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.details .date-time {
+    font-size: 15px;
+}
+
+.details .date-time > span{
+    font-size: 17px;
+    font-weight: 600;
+    padding-right: 5px;
+}
+
+.details .address {
+    font-size: 15px;
+}
+
+.details .address > span{
+    font-size: 17px;
+    font-weight: 600;
+    padding-right: 5px;
+}
+
+.details .organizer {
+    padding-top: 10px;
+    font-size: 15px;
+}
+
+.details .organizer > span {
+    font-weight: 600;
+    font-size: 17px;
+    padding-right: 5px;
+}
+
+.details .description {
+    padding-top: 10px;
+    font-size: 15px;
+}
+
+.details .join-favor {
+    padding-top: 10px;
+    font-size: 15px;
+}

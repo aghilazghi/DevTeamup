@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace DevTeamup.Controllers
 {
+    [Authorize]
     public class TeamupsController : Controller
     {
         private ApplicationDbContext _context;
@@ -16,7 +17,7 @@ namespace DevTeamup.Controllers
             _context = new ApplicationDbContext();
         }
 
-        [Authorize]
+        
         public ActionResult Mine()
         {
             var currentUserId = User.Identity.GetUserId();
@@ -30,7 +31,7 @@ namespace DevTeamup.Controllers
             return View(teamups);
         }
 
-        [Authorize]
+        
         public ActionResult Favoring()
         {
             var currentUserId = User.Identity.GetUserId();
@@ -52,7 +53,7 @@ namespace DevTeamup.Controllers
             return View("Teamups", viewModel);
         }
 
-        [Authorize]
+        
         public ActionResult Contributing()
         {
             var currentUserId = User.Identity.GetUserId();
@@ -75,13 +76,14 @@ namespace DevTeamup.Controllers
             return View("Teamups", viewModel);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Search(TeamupsViewModel viewModel)
         {
             return RedirectToAction("Index", "Home", new { query = viewModel.SearchTerm });
         }
 
-        [Authorize]
+        
         public ActionResult Create()
         {
             var viewModel = new TeamupFormViewModel
@@ -94,7 +96,7 @@ namespace DevTeamup.Controllers
             return View("TeamupForm", viewModel);
         }
 
-        [Authorize]
+        
         public ActionResult Edit(int id)
         {
             var currentUserId = User.Identity.GetUserId();
@@ -117,7 +119,7 @@ namespace DevTeamup.Controllers
             return View("TeamupForm", viewModel);
         }
 
-        [Authorize]
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(TeamupFormViewModel viewModel)
@@ -147,7 +149,6 @@ namespace DevTeamup.Controllers
         }
 
 
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Update(TeamupFormViewModel viewModel)
@@ -170,6 +171,35 @@ namespace DevTeamup.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Mine", "Teamups");
+        }
+
+        [AllowAnonymous]
+        public ActionResult Details(int id)
+        {
+            var teamup = _context.Teamups
+                .Include(t => t.DevelopmentLanguage)
+                .Include(t => t.DevelopmentType)
+                .Include(t => t.Organizer)
+                .SingleOrDefault(t => t.Id == id);
+
+            if (teamup == null)
+                return HttpNotFound();
+
+            var viewModel = new TeamupDetailViewModel {Teamup = teamup};
+
+            if (!User.Identity.IsAuthenticated) return View("Details", viewModel);
+
+            var currentUserId = User.Identity.GetUserId();
+
+            viewModel.CurrentUserId = currentUserId;
+
+            viewModel.IsContributing = _context.Collaborations
+                .Any(c => c.TeamupId == teamup.Id && c.ContributorId == currentUserId);
+
+            viewModel.IsFavoring = _context.Favorites
+                .Any(f => f.TeamupId == teamup.Id && f.FavoringUserId == currentUserId);
+
+            return View("Details", viewModel);
         }
     }
 }

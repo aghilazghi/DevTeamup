@@ -55,56 +55,12 @@
                 </div>
             </div>
 
-            @if (Model.IsAuthenticated && Model.CurrentUserId != teamup.OrganizerId)
-            {
                 <div class="link-buttons">
-                    <span>
-                        <button data-teamup-id="@teamup.Id" class="btn btn-link btn-sm js-toggle-attendance">Join</button>
-                    </span>
-                    <span>
-                        <button data-teamup-id="@teamup.Id" class="btn btn-link btn-sm js-toggle-favorite">Mark as your favorite</button>
-
-                    </span>
-                    <span>
-                        <button class="btn btn-link btn-sm pull-right">Details</button>
-                    </span>
+                        <a href="@Url.Action("Details", "Teamups", new { id = teamup.Id} )" class="detail-link pull-right">Details</a>
                 </div>
-            }
+            
 
         </li>
         }
 </ul>
 
-@section scripts {
-    <script>
-        $(document).ready(function() {
-            $(".js-toggle-attendance").click(function(e) {
-                var buttonEvent = $(e.target);
-                $.post("/api/collaborations", { teamupId: buttonEvent.attr("data-teamup-id") })
-                    .done(function() {
-                        buttonEvent
-                            .removeClass("btn-default")
-                            .addClass("btn-success")
-                            .text("Joined");
-                        toastr.success("You have joined this teamup successfully!");
-
-                    })
-                    .fail(function() {
-                        toastr.error("There was an error handling your request!");
-                    });
-            });
-
-            $(".js-toggle-favorite").click(function (e) {
-                var buttonEvent = $(e.target);
-                $.post("/api/favorites", { teamupId: buttonEvent.attr("data-teamup-id") })
-                    .done(function () {
-                        buttonEvent.text("Marked as your favorite");
-                        toastr.success("This teamup is marked as your favorite!");
-                    })
-                    .fail(function () {
-                        toastr.error("There was an error handling your request!");
-                    });
-            });
-        });
-    </script>
-}
