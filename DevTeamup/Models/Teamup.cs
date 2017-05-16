@@ -33,7 +33,7 @@ namespace DevTeamup.Models
         public byte DevelopmentLanguageId { get; set; }
 
         [Required]
-        [StringLength(1024)]
+        [StringLength(250)]
         public string Description { get; set; }
 
         public bool IsCanceled { get; private set; }

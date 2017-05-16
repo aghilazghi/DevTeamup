@@ -167,6 +167,8 @@ h6,
     border-radius: 8px;
 }
 
+
+
 /*page specifice styles*/
 .teamups {
     list-style: none;
@@ -344,6 +346,16 @@ h6,
 }
 
 .details .join-favor {
-    padding-top: 10px;
+    padding-top: 20px;
     font-size: 15px;
+}
+
+.details #map {
+    width:100%;
+    min-height:300px;
+    margin-left: 15px;
+}
+
+.details .left-detail {
+    min-height: 300px;
 }

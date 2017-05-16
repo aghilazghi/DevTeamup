@@ -4,7 +4,7 @@
 }
 <div class="details">
     <div class="row">
-        <div class="col-md-5 left-detail">
+        <div class="col-md-6 left-detail">
             <div class="development-type">
                 @Model.Teamup.DevelopmentType.Name
             </div>
@@ -32,7 +32,7 @@
                     }
                     else
                     {
-                        <button data-teamup-id ="@Model.Teamup.Id" class="btn btn-info js-toggle-collaboration">Join</button>
+                        <button data-teamup-id ="@Model.Teamup.Id" class="btn btn-primary js-toggle-collaboration">Join</button>
                     }
 
                     if (Model.IsFavoring)
@@ -41,27 +41,82 @@
                     }
                     else
                     {
-                        <button data-teamup-id ="@Model.Teamup.Id" class="btn btn-info js-toggle-favorite">Mark as your favorite</button>
+                        <button data-teamup-id ="@Model.Teamup.Id" class="btn btn-primary js-toggle-favorite">Mark as your favorite</button>
                     }
                 }
             </div>
         </div>
-        <div class="col-md-7">
-            Map
+        <div class="col-md-6">
+            <div id="map" data-address="@Model.Teamup.Address">
+                
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    //function myMap() {
+    //    var mapCanvas = document.getElementById("map");
+    //    var myCenter = new google.maps.LatLng(51.508742, -0.120850);
+    //    var mapOptions = { center: myCenter, zoom: 14 };
+    //    var map = new google.maps.Map(mapCanvas, mapOptions);
+    //    var marker = new google.maps.Marker({
+    //        position: myCenter,
+    //        animation: google.maps.Animation.BOUNCE
+    //    });
+    //    marker.setMap(map);
+    //}
+
+    var geocoder;
+    var map;
+    var address = document.getElementById('map');
+
+    function initialize() {
+        geocoder = new google.maps.Geocoder();
+        var latlng = new google.maps.LatLng(53.3496, -6.3263);
+        var mapOptions =
+        {
+            zoom: 15,
+            center: latlng
+        }
+        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        codeAddress(address.dataset.address);
+    }
+
+    function codeAddress(address) {
+        geocoder.geocode({ address: address }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker(
+                    {
+                        map: map,
+                        position: results[0].geometry.location,
+                        animation: google.maps.Animation.BOUNCE
+                    });
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=MyKey&callback=initMap&callback=initialize"
+        type="text/javascript">
+
+</script>
+
+
 
 @section scripts {
     <script>
         $(document).ready(function() {
             $(".js-toggle-collaboration").click(function(e) {
                 var buttonEvent = $(e.target);
-                if (buttonEvent.hasClass("btn-info")) {
+                if (buttonEvent.hasClass("btn-primary")) {
                     $.post("/api/collaborations", { teamupId: buttonEvent.attr("data-teamup-id") })
                         .done(function() {
                             buttonEvent
-                                .removeClass("btn-info")
+                                .removeClass("btn-primary")
                                 .addClass("btn-success")
                                 .text("Joined");
                             toastr.success("You have joined this teamup successfully!");
@@ -78,7 +133,7 @@
                         .done(function() {
                             buttonEvent
                                 .removeClass("btn-success")
-                                .addClass("btn-info")
+                                .addClass("btn-primary")
                                 .text("Join");
                             toastr.warning("You are no longer contributing to this teamup!");
                         })
@@ -91,11 +146,11 @@
             $(".js-toggle-favorite").click(function (e) {
                 var buttonEvent = $(e.target);
 
-                if (buttonEvent.hasClass("btn-info")) {
+                if (buttonEvent.hasClass("btn-primary")) {
                     $.post("/api/favorites", { teamupId: buttonEvent.attr("data-teamup-id") })
                         .done(function() {
                             buttonEvent
-                                .removeClass("btn-info")
+                                .removeClass("btn-primary")
                                 .addClass("btn-success")
                                 .text("Marked as your favorite");
                             toastr.success("This teamup is marked as your favorite!");
@@ -113,7 +168,7 @@
                         .done(function () {
                             buttonEvent
                                 .removeClass("btn-success")
-                                .addClass("btn-info")
+                                .addClass("btn-primary")
                                 .text("Mark as your favorite");
                             toastr.warning("You are no longer favoring this teamup!");
                         })
@@ -122,6 +177,7 @@
                         });
                 }
             });
+
         });
     </script>
 }

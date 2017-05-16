@@ -245,6 +245,10 @@
     <Compile Include="Migrations\201705121343294_AddCreatedOnAndModifiedOnPropertiesToTeamupNotificationAndUserNotification.Designer.cs">
       <DependentUpon>201705121343294_AddCreatedOnAndModifiedOnPropertiesToTeamupNotificationAndUserNotification.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705161417198_ChangeStringLengthTeamupDescriptionProperty.cs" />
+    <Compile Include="Migrations\201705161417198_ChangeStringLengthTeamupDescriptionProperty.Designer.cs">
+      <DependentUpon>201705161417198_ChangeStringLengthTeamupDescriptionProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Collaboration.cs" />
@@ -403,6 +407,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705121343294_AddCreatedOnAndModifiedOnPropertiesToTeamupNotificationAndUserNotification.resx">
       <DependentUpon>201705121343294_AddCreatedOnAndModifiedOnPropertiesToTeamupNotificationAndUserNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705161417198_ChangeStringLengthTeamupDescriptionProperty.resx">
+      <DependentUpon>201705161417198_ChangeStringLengthTeamupDescriptionProperty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
