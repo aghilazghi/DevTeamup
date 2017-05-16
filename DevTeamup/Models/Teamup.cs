@@ -44,6 +44,8 @@ namespace DevTeamup.Models
 
         public ICollection<Collaboration> Collaborations { get; private set; }
 
+        public ICollection<Discussion> Discussions { get; set; }
+
         public Teamup()
         {
             Collaborations = new Collection<Collaboration>();

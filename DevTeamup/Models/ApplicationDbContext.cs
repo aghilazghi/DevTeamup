@@ -1,6 +1,6 @@
-﻿using System;
-using DevTeamup.Migrations;
+﻿using DevTeamup.Migrations;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Data.Entity;
 using System.Linq;
 
@@ -36,6 +36,16 @@ namespace DevTeamup.Models
             modelBuilder.Entity<Collaboration>()
                 .HasRequired(a => a.Teamup)
                 .WithMany(t => t.Collaborations)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Discussion>()
+                .HasRequired(d => d.Teamup)
+                .WithMany(t => t.Discussions)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Reply>()
+                .HasRequired(r => r.Discussion)
+                .WithMany(d => d.Replies)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Favorite>()

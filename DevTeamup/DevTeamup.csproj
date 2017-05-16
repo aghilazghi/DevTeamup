@@ -249,16 +249,22 @@
     <Compile Include="Migrations\201705161417198_ChangeStringLengthTeamupDescriptionProperty.Designer.cs">
       <DependentUpon>201705161417198_ChangeStringLengthTeamupDescriptionProperty.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705161607385_AddDiscussionAndReplyTables.cs" />
+    <Compile Include="Migrations\201705161607385_AddDiscussionAndReplyTables.Designer.cs">
+      <DependentUpon>201705161607385_AddDiscussionAndReplyTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Collaboration.cs" />
     <Compile Include="Models\DevelopmentLanguage.cs" />
     <Compile Include="Models\DevelopmentType.cs" />
+    <Compile Include="Models\Discussion.cs" />
     <Compile Include="Models\Favorite.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ITimeStamp.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\NotificationType.cs" />
+    <Compile Include="Models\Reply.cs" />
     <Compile Include="Models\Teamup.cs" />
     <Compile Include="Models\UserNotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -410,6 +416,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705161417198_ChangeStringLengthTeamupDescriptionProperty.resx">
       <DependentUpon>201705161417198_ChangeStringLengthTeamupDescriptionProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705161607385_AddDiscussionAndReplyTables.resx">
+      <DependentUpon>201705161607385_AddDiscussionAndReplyTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
