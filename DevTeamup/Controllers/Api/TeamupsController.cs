@@ -29,8 +29,6 @@ namespace DevTeamup.Controllers.Api
 
             teamup.Cancel();
 
-           
-
             _context.SaveChanges();
 
             return Ok();

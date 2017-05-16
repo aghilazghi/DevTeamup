@@ -49,6 +49,7 @@ namespace DevTeamup.Models
         public Teamup()
         {
             Collaborations = new Collection<Collaboration>();
+            Discussions = new Collection<Discussion>();
         }
 
         public void Cancel()

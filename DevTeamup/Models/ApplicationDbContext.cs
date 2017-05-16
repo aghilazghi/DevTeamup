@@ -13,9 +13,11 @@ namespace DevTeamup.Models
         public DbSet<Teamup> Teamups { get; set; }
         public DbSet<DevelopmentType> DevelopmentTypes { get; set; }
         public DbSet<DevelopmentLanguage> DevelopmentLanguages { get; set; }
+        public DbSet<Discussion> Discussions { get; set; }
         public DbSet<Collaboration> Collaborations { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Reply> Replies { get; set; }
         public DbSet<UserNotification> UserNotifications { get; set; }
         
 

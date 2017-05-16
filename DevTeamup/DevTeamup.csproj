@@ -194,9 +194,11 @@
     <Compile Include="Dtos\CollaborationDto.cs" />
     <Compile Include="Dtos\DevelopmentLanguageDto.cs" />
     <Compile Include="Dtos\DevelopmentTypeDto.cs" />
+    <Compile Include="Dtos\DiscussionDto.cs" />
     <Compile Include="Dtos\FavoriteDto.cs" />
     <Compile Include="Dtos\NotificationDto.cs" />
     <Compile Include="Dtos\NotificationResultDto.cs" />
+    <Compile Include="Dtos\ReplyDto.cs" />
     <Compile Include="Dtos\TeamupDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -252,6 +254,10 @@
     <Compile Include="Migrations\201705161607385_AddDiscussionAndReplyTables.cs" />
     <Compile Include="Migrations\201705161607385_AddDiscussionAndReplyTables.Designer.cs">
       <DependentUpon>201705161607385_AddDiscussionAndReplyTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705161715379_AddDiscussionReplyToDbContext.cs" />
+    <Compile Include="Migrations\201705161715379_AddDiscussionReplyToDbContext.Designer.cs">
+      <DependentUpon>201705161715379_AddDiscussionReplyToDbContext.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -419,6 +425,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705161607385_AddDiscussionAndReplyTables.resx">
       <DependentUpon>201705161607385_AddDiscussionAndReplyTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705161715379_AddDiscussionReplyToDbContext.resx">
+      <DependentUpon>201705161715379_AddDiscussionReplyToDbContext.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

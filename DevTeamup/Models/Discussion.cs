@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace DevTeamup.Models
@@ -27,6 +28,11 @@ namespace DevTeamup.Models
         public DateTime ModifiedOn { get; set; }
 
         public ICollection<Reply> Replies { get; set; }
+
+        public Discussion()
+        {
+            Replies = new Collection<Reply>();
+        }
 
     }
 }
