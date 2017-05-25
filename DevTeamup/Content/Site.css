@@ -1,4 +1,7 @@
-﻿body {
+﻿html {
+    font-size: 14px;
+}
+body {
     padding-top: 80px;
     padding-bottom: 20px;
 }
@@ -20,6 +23,7 @@
 input,
 select {
     max-width: 280px;
+    font-size: 1.4rem;
 }
 
 .required {
@@ -58,6 +62,7 @@ footer {
 
 .navbar-inverse .navbar-nav > li > a {
     color: #ECEFF1;
+    font-size: 1.5rem;
 }
 
 .navbar-inverse .navbar-brand {
@@ -75,8 +80,8 @@ footer {
 }
 
 .navbar-brand {
-    font-size: 22px;
-    font-weight: bold;
+    font-size: 2.5rem;
+    font-weight: 700;
 }
 
 .navbar-inverse .notifications {
@@ -94,6 +99,7 @@ footer {
 
 .dropdown-menu {
     box-shadow: none;
+    font-size: 1.5rem;
 }
 
 .dropdown-menu > li > a:hover {
@@ -146,7 +152,7 @@ h6,
 }
 
 .form-control {
-    font-size: 16px;
+    font-size: 1.3rem;
     height: 42px;
     border: 1px solid #455A64;
     -ms-border-radius: 8px;
@@ -164,95 +170,22 @@ h6,
     padding: 6px 18px;*/
     -ms-border-radius: 8px;
     border-radius: 8px;
+    font-size: 1.3rem;
 }
 
 
 
 /*page specifice styles*/
-.teamups {
-    list-style: none;
-    padding: 0;
-}
-
-.teamups > li {
-    position: relative;
-    padding: 0;
-    margin: 0 30px 30px 10px;
-}
-
-.teamups > li .date-And-detail {
-    background:#E0E0E0;
-        
-}
-
-.teamups > li .date {
-    background: #546E7A;
-    color: #E3F2FD;
-    text-align: center;
-    width: 50px;
-}
-
-.teamups > li .date .month {
-    text-transform: uppercase;
-    font-size: 15px;
-    font-weight: bold;
-    padding: 3px;
-}
-
-.teamups > li .date .day-and-year {
-    background: #B0BEC5;
-    color: #455A64;
-}
-
-.teamups > li .date .day-and-year .day {
-    padding: 3px 0 3px 0;
-}
-.teamups > li .date .day-and-year .year {
-    padding: 0 0 3px 0;
-}
-.teamups > li .details {
-    position: absolute;
-    top: 0;
-    left: 70px;
-    padding: 3px 0 3px 0;
-    color: #455A64;
-}
-
-.teamups > li .date-And-detail .details .type {
-    font-weight: 700;  
-    margin-bottom: 5px; 
-}
-
-.teamups > li .date-And-detail .details .language {
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-
-.teamups > li .date-And-detail .details .programmer {
-    font-size: 14px;
-}
-
-.teamups > li .link-buttons {
-    background-color: #CFD8DC;
-    padding: 5px 5px 5px 70px; 
-}
-
-.teamups > li .link-buttons .cancel > a {
-    color: red;
-}
-
-.teamups > li .right-padding {
-    padding: 0 40px 0 0;
-}
 
 .popover-notifications .popover-title {
     font-weight: 700;
     color:  #64B5F6;
-    font-size: 17px;
+    font-size: 1.8rem;
 }
 
 .popover-notifications .popover-content {
     padding: 0;
+    font-size: 1.5rem;
 }
 
 
@@ -284,11 +217,79 @@ h6,
 
 .popover-notifications ul.notifications > li .color-highlight {
     color: #64B5F6;
-    font-size: 13px;
+    font-size: 1.3rem;
 }
 
+.future-meatups-title {
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: #455A64;
+}
 #search-teamps {
     width: 300px;
+    margin-bottom: 5rem;
+}
+
+#future-teamups {
+    margin: 0;
+}
+
+.ffuture-meatup-col-wrapper {
+    margin: 0;
+}
+
+.future-meatups-col {
+    background-color: rgba(176, 190, 197, .7);
+    margin-bottom: 4rem;
+    padding: 0 1.8125rem 1.8125rem 1.8125rem
+
+}
+
+.future-meatups-photo {
+    -ms-border-radius: 50px;
+    border-radius: 50px;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto -40px auto;
+    position: relative;
+    top: -40px;
+    border: 4px solid rgba(176, 190, 197, .7);
+}
+
+.future-meatups-organizer {
+    color: #455A64;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.future-meatups-development {
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.future-meatups-language {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.future-meatups-date {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.future-meaturps-details-buttons {
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 10px;
+}
+
+.details {
+    margin-top: 2rem;
 }
 
 .details .left-detail {
@@ -300,48 +301,48 @@ h6,
 }
 
 .details .development-type {   
-    font-weight: 600;
-    font-size: 24px;
+    font-weight: 700;
+    font-size: 2.2rem;
 }
 .details .development-language {
     font-weight: 500;
-    font-size: 18px;
+    font-size: 2rem;
 }
 
 .details .date-time {
-    font-size: 15px;
+    font-size: 1.5rem;
 }
 
 .details .date-time > span{
-    font-size: 17px;
+    font-size: 1.8rem;
     font-weight: 600;
     padding-right: 5px;
 }
 
 .details .address {
-    font-size: 15px;
+    font-size: 1.5rem;
 }
 
 .details .address > span{
-    font-size: 17px;
+    font-size: 1.8rem;
     font-weight: 600;
     padding-right: 5px;
 }
 
 .details .organizer {
     padding-top: 10px;
-    font-size: 15px;
+    font-size: 1.5rem;
 }
 
 .details .organizer > span {
     font-weight: 600;
-    font-size: 17px;
+    font-size: 1.8rem;
     padding-right: 5px;
 }
 
 .details .description {
     padding-top: 10px;
-    font-size: 15px;
+    font-size: 1.5rem;
 }
 
 .details .join-favor {
@@ -351,12 +352,12 @@ h6,
 
 .details #map {
     width:100%;
-    min-height:300px;
+    min-height:400px;
     margin-left: 15px;
 }
 
 .details .left-detail {
-    min-height: 300px;
+    min-height: 400px;
 }
 
 .details .discussions {
@@ -365,7 +366,7 @@ h6,
 
 .details .discussion-title {
     font-weight: 700;
-    font-size: 22px;
+    font-size: 2rem;
     color: #455A64;
     padding-bottom: 30px;
 }
@@ -384,7 +385,7 @@ h6,
     margin-top: 30px;
     margin-left: 40px;
     list-style: none;
-    
+    font-size: 1.3rem;
 }
 
 .discussion-reply img{
