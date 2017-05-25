@@ -18,8 +18,7 @@
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
-select,
-textarea {
+select {
     max-width: 280px;
 }
 
@@ -358,4 +357,73 @@ h6,
 
 .details .left-detail {
     min-height: 300px;
+}
+
+.details .discussions {
+    padding-top: 30px;
+}
+
+.details .discussion-title {
+    font-weight: 700;
+    font-size: 22px;
+    color: #455A64;
+    padding-bottom: 30px;
+}
+
+.details .discussion-input {
+    background-color: #E0E0E0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.details .discussion-textarea {
+    margin-bottom: 15px;
+}
+
+.discussion-reply {
+    margin-top: 30px;
+    margin-left: 40px;
+    list-style: none;
+    
+}
+
+.discussion-reply img{
+    float: left;
+    margin-right: 9px;
+}
+
+.discussion-reply .discussion-header {
+    padding-bottom: 40px;
+}
+
+.discussion-reply .reply-section ul {
+    list-style: none;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.discussion-reply .reply-message {
+    padding-bottom: 20px;
+}
+
+.discussion-reply .post-reply {
+    display: block;
+    margin-left: 50px;
+    margin-right: 100px;
+}
+
+.discussion-reply .discussed-by {
+    font-size: 17px;
+    font-weight: 700;
+    color: #455A64;
+}
+
+.discussion-reply .replied-by {
+    font-size: 17px;
+    font-weight: 700;
+    color: #455A64;
+}
+
+.discussion-reply .replied-button {
+    margin-top: 10px;
 }

@@ -11,6 +11,8 @@ namespace DevTeamup.App_Start
             Mapper.CreateMap<ApplicationUser, ApplicationUserDto>();
             Mapper.CreateMap<Teamup, TeamupDto>();
             Mapper.CreateMap<Notification, NotificationDto>();
+            Mapper.CreateMap<Discussion, DiscussionDto>();
+            Mapper.CreateMap<Reply, ReplyDto>();
         }
     }
 }

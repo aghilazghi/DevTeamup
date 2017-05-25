@@ -184,8 +184,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CollaborationsController.cs" />
+    <Compile Include="Controllers\Api\DiscussionsController.cs" />
     <Compile Include="Controllers\Api\FavoritesController.cs" />
     <Compile Include="Controllers\Api\NotificationsController.cs" />
+    <Compile Include="Controllers\Api\RepliesController.cs" />
     <Compile Include="Controllers\Api\TeamupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -259,12 +261,17 @@
     <Compile Include="Migrations\201705161715379_AddDiscussionReplyToDbContext.Designer.cs">
       <DependentUpon>201705161715379_AddDiscussionReplyToDbContext.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705241921508_ChangeDiscusionPostedByIdToPostedBy.cs" />
+    <Compile Include="Migrations\201705241921508_ChangeDiscusionPostedByIdToPostedBy.Designer.cs">
+      <DependentUpon>201705241921508_ChangeDiscusionPostedByIdToPostedBy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Collaboration.cs" />
     <Compile Include="Models\DevelopmentLanguage.cs" />
     <Compile Include="Models\DevelopmentType.cs" />
     <Compile Include="Models\Discussion.cs" />
+    <Compile Include="Models\Extensions\IdentityExtensions.cs" />
     <Compile Include="Models\Favorite.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ITimeStamp.cs" />
@@ -312,6 +319,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\app\discussions.js" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -322,10 +330,17 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.autosize.js" />
+    <Content Include="Scripts\jquery.autosize.min.js" />
+    <Content Include="Scripts\jquery.timeago.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-3.4.2.debug.js" />
+    <Content Include="Scripts\knockout-3.4.2.js" />
+    <Content Include="Scripts\knockout.mapping-latest.debug.js" />
+    <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
@@ -377,6 +392,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -428,6 +444,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705161715379_AddDiscussionReplyToDbContext.resx">
       <DependentUpon>201705161715379_AddDiscussionReplyToDbContext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705241921508_ChangeDiscusionPostedByIdToPostedBy.resx">
+      <DependentUpon>201705241921508_ChangeDiscusionPostedByIdToPostedBy.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

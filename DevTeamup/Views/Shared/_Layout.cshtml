@@ -40,6 +40,7 @@
     </div>
 
     @Scripts.Render("~/bundles/lib")
+    @Scripts.Render("~/bundles/app")
     @RenderSection("scripts", required: false)
     
 
@@ -89,7 +90,7 @@
         $.getJSON("/api/notifications",
             function (notifications) {
 
-                if (notifications.unread == 0) {
+                if (notifications.unread === 0) {
 
                     $(".js-notifications-count").text("").addClass("hide");
 

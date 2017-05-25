@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 
 namespace DevTeamup.Controllers.Api
 {
+    [Authorize]
     public class CollaborationsController : ApiController
     {
         private readonly ApplicationDbContext _context;

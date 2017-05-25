@@ -13,8 +13,15 @@ namespace DevTeamup
                         "~/Scripts/moment.js",
                         "~/Scripts/toastr.min.js",
                         "~/Scripts/bootstrap.js",
+                        "~/Scripts/knockout-3.4.2.js",
                         "~/Scripts/respond.js",
+                        "~/Scripts/jquery.autosize.min.js",
+                        "~/Scripts/jquery.timeago.js",
                         "~/Scripts/bootbox.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                        "~/Scripts/app/discussions.js"
+                ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
