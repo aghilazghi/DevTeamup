@@ -9,7 +9,12 @@ namespace DevTeamup.Models
         public int Id { get; set; }
 
         [Required]
-        public string RepliedBy { get; set; }
+        public string RepliedByName { get; set; }
+
+        public ApplicationUser RepliedBy { get; set; }
+
+        [Required]
+        public string RepliedById { get; set; }
 
         [Required]
         [StringLength(250)]

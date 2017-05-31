@@ -22,6 +22,8 @@ namespace DevTeamup.Models
         [StringLength(250)]
         public string Interest { get; set; }
 
+        public byte[] UserImage { get; set; }
+
         public ICollection<UserNotification> UserNotifications { get; set; }
 
         public ApplicationUser()

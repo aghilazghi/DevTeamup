@@ -220,6 +220,9 @@ h6,
     font-size: 1.3rem;
 }
 
+.logged-user-image {
+    margin-top: 10px;
+}
 .future-meatups-title {
     font-size: 2.3rem;
     font-weight: 700;

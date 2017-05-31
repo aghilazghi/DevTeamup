@@ -9,7 +9,9 @@ namespace DevTeamup.Dtos
 
         public int Id { get; set; }
 
-        public string PostedBy { get; set; }
+        public string PostedByName { get; set; }
+
+        public string PostedById { get; set; }
  
         public string Body { get; set; }
 

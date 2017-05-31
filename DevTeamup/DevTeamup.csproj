@@ -265,6 +265,18 @@
     <Compile Include="Migrations\201705241921508_ChangeDiscusionPostedByIdToPostedBy.Designer.cs">
       <DependentUpon>201705241921508_ChangeDiscusionPostedByIdToPostedBy.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705262306157_ExtendIdentityWithUserImageProperty.cs" />
+    <Compile Include="Migrations\201705262306157_ExtendIdentityWithUserImageProperty.Designer.cs">
+      <DependentUpon>201705262306157_ExtendIdentityWithUserImageProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705300126463_AddUserIdToDiscussionAndReplyModels.cs" />
+    <Compile Include="Migrations\201705300126463_AddUserIdToDiscussionAndReplyModels.Designer.cs">
+      <DependentUpon>201705300126463_AddUserIdToDiscussionAndReplyModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705300133317_FixTypos.cs" />
+    <Compile Include="Migrations\201705300133317_FixTypos.Designer.cs">
+      <DependentUpon>201705300133317_FixTypos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Collaboration.cs" />
@@ -287,6 +299,7 @@
     <Compile Include="ViewModels\ConfigureTwoFactorViewModel.cs" />
     <Compile Include="ViewModels\CrudAction.cs" />
     <Compile Include="ViewModels\DateFormatValidation.cs" />
+    <Compile Include="ViewModels\ExtendRegisterViewModel.cs" />
     <Compile Include="ViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="ViewModels\ExternalLoginListViewModel.cs" />
     <Compile Include="ViewModels\FactorViewModel.cs" />
@@ -447,6 +460,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705241921508_ChangeDiscusionPostedByIdToPostedBy.resx">
       <DependentUpon>201705241921508_ChangeDiscusionPostedByIdToPostedBy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705262306157_ExtendIdentityWithUserImageProperty.resx">
+      <DependentUpon>201705262306157_ExtendIdentityWithUserImageProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705300126463_AddUserIdToDiscussionAndReplyModels.resx">
+      <DependentUpon>201705300126463_AddUserIdToDiscussionAndReplyModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705300133317_FixTypos.resx">
+      <DependentUpon>201705300133317_FixTypos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

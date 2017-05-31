@@ -10,7 +10,12 @@ namespace DevTeamup.Models
         public int Id { get; set; }
 
         [Required]
-        public string PostedBy { get; set; }
+        public string PostedByName { get; set; }
+
+        public ApplicationUser PostedBy { get; set; }
+
+        [Required]
+        public string PostedById { get; set; }
 
         [Required]
         [StringLength(250)]

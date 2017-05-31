@@ -72,7 +72,7 @@
         </div>
         <ul class="discussion-reply" data-bind="foreach: discussions">
             <li class="discussion-header">
-                <img src="@Url.Content("~/Images/user.png")">
+                <img data-bind ="attr: { src: '/api/discussions/getImage?id=' + postedById()}" width="45" height="45">
                 <p>
                     <span class="discussed-by" data-bind="text: postedBy">
                     </span> said:
@@ -84,7 +84,7 @@
                     <div class="reply-section">
                         <ul data-bind="foreach: replies">
                             <li class="reply-message">
-                                <img src="@Url.Content("~/Images/user.png")">
+                                <img data-bind ="attr: { src: '/api/discussions/getImage?id=' + repliedById()}" width="45" height="45">
                                 <p>
                                     <span class="replied-by" data-bind="text: repliedBy"></span>
                                     said: <span data-bind="html: body"></span>

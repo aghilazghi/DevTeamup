@@ -8,7 +8,8 @@ function Discussion(data) {
     self.id = data.id;
     self.teamupId = data.teamupId;
     self.body = ko.observable(data.body || "");
-    self.postedBy = data.postedBy || "";
+    self.postedBy = data.postedByName || "";
+    self.postedById = ko.observable(data.postedById || "");
     self.createdOn = moment(data.createdOn).fromNow();
     self.replies = ko.observableArray();
     self.newReply = ko.observable();
@@ -51,8 +52,9 @@ function Reply(data) {
 
     self.id = data.id;
     self.discussionId = data.discussionId;
-    self.body = ko.observable(data.body);
-    self.repliedBy = data.repliedBy;
+    self.body = ko.observable(data.body || "");
+    self.repliedBy = data.repliedByName || "";
+    self.repliedById = ko.observable(data.repliedById || "");
     self.replyCreatedOn = moment(data.createdOn).fromNow();
 }
 
@@ -98,6 +100,7 @@ function ViewModel(data) {
             .done(function(result) {
                 self.discussions.splice(0, 0, new Discussion(result));
                 self.newDiscussion("");
+                toastr.success("Discussion is created successfully!");
             })
             .fail(function() {
                 toastr.error("Unable to add your discussion!");

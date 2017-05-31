@@ -1,11 +1,19 @@
 ﻿using DevTeamup.Dtos;
 using DevTeamup.Models;
 using DevTeamup.Models.Extensions;
+using Microsoft.AspNet.Identity;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Web.Hosting;
 using System.Web.Http;
 
 namespace DevTeamup.Controllers.Api
 {
     [Authorize]
+    [RoutePrefix("api/replies")]
     public class RepliesController : ApiController
     {
         private readonly ApplicationDbContext _context;
@@ -20,10 +28,12 @@ namespace DevTeamup.Controllers.Api
         {
 
             var currentUser = User.Identity.GetUserFirstname();
+            var currentUserId = User.Identity.GetUserId();
 
             var reply = new Reply
             {
-                RepliedBy = currentUser,
+                RepliedByName = currentUser,
+                RepliedById = currentUserId,
                 Body = dto.Body,
                 DiscussionId = dto.DiscussionId
             };

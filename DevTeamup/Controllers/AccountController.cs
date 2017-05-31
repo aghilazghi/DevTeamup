@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -148,19 +149,37 @@ namespace DevTeamup.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(ExtendRegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
+                if (model.UserProfileImage != null)
+                {
+                    if (model.UserProfileImage.ContentLength > (4 * 1024 * 1024))
+                    {
+                        ModelState.AddModelError("CustomError", "Image can not be larger than 4MB");
+                        return View();
+                    }
+
+                    if (!(model.UserProfileImage.ContentType == "image/jpeg" || model.UserProfileImage.ContentType == "image/jpg" || model.UserProfileImage.ContentType == "image/gif"))
+                    {
+                        ModelState.AddModelError("CustomError", "Image must be of type jpeg, jpg, or gif");
+                    }
+                }
+
+                var imageData = new byte[model.UserProfileImage.ContentLength];
+                model.UserProfileImage.InputStream.Read(imageData, 0, model.UserProfileImage.ContentLength);
+
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
-                    Interest = model.Interest
+                    Interest = model.Interest,
+                    UserImage = imageData
                 };
-
+                
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)

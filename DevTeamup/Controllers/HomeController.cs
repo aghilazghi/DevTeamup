@@ -1,9 +1,12 @@
 ﻿using DevTeamup.Models;
 using DevTeamup.ViewModels;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace DevTeamup.Controllers
@@ -46,6 +49,29 @@ namespace DevTeamup.Controllers
             };
 
             return View("Teamups", viewModel);
+        }
+
+      
+        public FileContentResult UserImages(string id = null)
+        {
+            if (!User.Identity.IsAuthenticated) return DefaultImageFile();
+
+            var currentUserId = id ?? User.Identity.GetUserId();
+            //var context = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+            var image = _context.Users.FirstOrDefault(u => u.Id == currentUserId && u.UserImage != null);
+
+            return image != null ? new FileContentResult(image.UserImage, "image/jpeg") : DefaultImageFile();
+        }
+
+        private FileContentResult DefaultImageFile()
+        {
+            var fileName = HttpContext.Server.MapPath(@"~/Images/default.png");
+            var fileInfo = new FileInfo(fileName);
+            var imageLength = fileInfo.Length;
+            var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+            var binaryReader = new BinaryReader(fileStream);
+            var imageData = binaryReader.ReadBytes((int) imageLength);
+            return File(imageData, "Image/png");
         }
     }
 }

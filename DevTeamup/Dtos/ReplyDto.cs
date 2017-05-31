@@ -4,7 +4,9 @@ namespace DevTeamup.Dtos
 {
     public class ReplyDto
     {
-        public string RepliedBy { get; set; }
+        public string RepliedByName { get; set; }
+
+        public string RepliedById { get; set; }
 
         public string Body { get; set; }
 
