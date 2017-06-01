@@ -19,10 +19,11 @@ body {
     white-space: normal;
 }
 
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select {
-    max-width: 280px;
+    max-width: 350px;
     font-size: 1.4rem;
 }
 
@@ -151,8 +152,12 @@ h6,
     font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.control-label {
+    font-size: 1.4rem;
+}
+
 .form-control {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     height: 42px;
     border: 1px solid #455A64;
     -ms-border-radius: 8px;
@@ -223,11 +228,13 @@ h6,
 .logged-user-image {
     margin-top: 10px;
 }
+
 .future-meatups-title {
     font-size: 2.3rem;
     font-weight: 700;
     color: #455A64;
 }
+
 #search-teamps {
     width: 300px;
     margin-bottom: 5rem;
@@ -237,7 +244,12 @@ h6,
     margin: 0;
 }
 
-.ffuture-meatup-col-wrapper {
+#future-teamups textarea {
+    max-width: 350px;
+    font-size: 1.4rem;
+}
+
+.future-meatup-col-wrapper {
     margin: 0;
 }
 
@@ -289,6 +301,17 @@ h6,
     text-align: center;
     font-size: 1.5rem;
     padding: 10px;
+}
+
+.action-buttons {
+    text-align: center;
+    padding-top: 1.3rem;
+    font-size: 1.4rem;
+}
+
+.mine-title {
+    margin-bottom: 3rem;
+    color: #455A64;
 }
 
 .details {
@@ -430,4 +453,56 @@ h6,
 
 .discussion-reply .replied-button {
     margin-top: 10px;
+}
+
+.profile {
+    margin-top: 2.5rem;
+}
+
+.profile .image-container {
+    background-color: rgba(176, 190, 197, .7);
+}
+
+.profile .image {
+    margin: 2.5rem 2.5rem 1rem 2.5rem;
+}
+
+.profile .image-container .fullname {
+    font-size: 1.8rem;
+    font-weight: 700;
+    padding: 0 0 1rem 2rem;
+    color: #455A64;
+}
+
+.profile .profile-detail {
+    margin: 0;
+}
+
+.profile .title {
+    background-color: rgba(176, 190, 197, .7);
+    padding: 2.5rem;
+}
+
+.profile .title h2 {
+    font-size: 3rem;
+    color: #455A64;
+}
+.profile p {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    padding-left: 3rem;
+}
+
+.profile p span {
+    font-weight: 700;
+    color: #455A64;
+}
+
+.profile-edit {
+    margin-top: 3rem;
+}
+
+.profile-edit textarea {
+    max-width: 350px;
+    font-size: 1.4rem;
 }

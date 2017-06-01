@@ -4,59 +4,57 @@
     ViewBag.Title = "title";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h3>Teamups I'm Hosting</h3>
+'
+<div class="mine-title">
+    <h2 >Teamups I'm Hosting</h2>
+</div>
 <hr />
 
-<ul class="teamups row">
+<div class="teamups row">
     @foreach (var teamup in Model)
     {
-        <li class="col-md-3">
-            <div class="date-And-detail">
-                <div class="date">
-                    <div class="month">
-                        @teamup.DateTime.ToString("MMM")
-                    </div>
-                    <div class="day-and-year">
-                        <div class="day">
-                            @teamup.DateTime.ToString("d ")
-                        </div>
-                        <div class="year">
-                            @teamup.DateTime.ToString("yyyy")
-                        </div>
-                    </div>
+        <div class="col-md-4 future-meatup-col-wrapper">
+            <div class="future-meatups-col">
+                <div class="future-meatups-photo">
+                    <img src="@Url.Action("UserImages", "Home", new { id = teamup.OrganizerId })" alt="User image" width="100" height="100" />
                 </div>
-                <div class="details">
-                    <div class="type">
-                        @teamup.DevelopmentType.Name
-                    </div>
-                    <div class="language">
-                        With @teamup.DevelopmentLanguage.Name
+                <h3 class="future-meatups-organizer">
+                    @teamup.Organizer.FirstName @teamup.Organizer.LastName
+                </h3>
+                <h4 class="future-meatups-development">
+                    @teamup.DevelopmentType.Name
+                </h4>
+                <h4 class="future-meatups-language">
+                    with @teamup.DevelopmentLanguage.Name
+                </h4>
+                <div class="future-meatups-date">
+                    <span>@teamup.DateTime.ToString("MMMM")</span>
+                    <span>@teamup.DateTime.ToString("d "),</span>
+                    <span>@teamup.DateTime.ToString("yyyy")</span>
+                </div>
+                @if (teamup.IsCanceled)
+                {
+                    <span class="label label-warning pull-right">Cancelled</span>
+                }
+                <div class="action-buttons">
+                    <span>
+                        <a href="@Url.Action("Edit", "Teamups", new {id = teamup.Id})" class="edit">
+                            Edit |
+                        </a>
 
-                    </div>
-                    <div class="address">
-                        @teamup.Address
-                    </div>
+                    </span>
+                    <span class="cancel">
+                        <a href="#" class="js-cancel-teamup" data-teamup-id="@teamup.Id">
+                            Cancel
+                        </a>
+                    </span>
                 </div>
+
             </div>
 
-
-            <div class="link-buttons">
-                <span>
-                    <a href="@Url.Action("Edit", "Teamups", new {id = teamup.Id})" class="edit">
-                        Edit |
-                    </a>
-
-                </span>
-                <span class="cancel">
-                    <a href="#" class="js-cancel-teamup" data-teamup-id="@teamup.Id">
-                        Cancel
-                    </a>
-                </span>
-            </div>
-        </li>
+        </div>      
     }
-</ul>
+</div>
 
 @section scripts
 {

@@ -1,13 +1,11 @@
-﻿using System;
+﻿using DevTeamup.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using DevTeamup.Models;
-using DevTeamup.ViewModels;
 
 namespace DevTeamup.Controllers
 {
@@ -53,29 +51,66 @@ namespace DevTeamup.Controllers
 
         //
         // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        public async Task<ActionResult> Index()
         {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
-                : "";
+            var currentUserId = User.Identity.GetUserId();
+            var user = await UserManager.FindByIdAsync(currentUserId);
+            return View(user);
+        }
 
-            var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
+        public async Task<ActionResult> Edit()
+        {
+            var currentUserId = User.Identity.GetUserId();
+            var user = await UserManager.FindByIdAsync(currentUserId);
+            var model = new EditUserViewModel
             {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Interest = user.Interest,
+                UserName = user.UserName
             };
+
             return View(model);
         }
 
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditPost(EditUserViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var currentUserId = User.Identity.GetUserId();
+            var userToUpdate = await UserManager.FindByIdAsync(currentUserId);
+            byte[] imageData = null;
+
+            if (model.UserProfileImage != null)
+            {
+                if (model.UserProfileImage.ContentLength > (4 * 1024 * 1024))
+                {
+                    ModelState.AddModelError("CustomError", "Image can not be larger than 4MB");
+                    return View();
+                }
+
+                if (!(model.UserProfileImage.ContentType == "image/jpeg" || model.UserProfileImage.ContentType == "image/jpg" || model.UserProfileImage.ContentType == "image/gif"))
+                {
+                    ModelState.AddModelError("CustomError", "Image must be of type jpeg, jpg, or gif");
+                }
+
+                imageData = new byte[model.UserProfileImage.ContentLength];
+                model.UserProfileImage.InputStream.Read(imageData, 0, model.UserProfileImage.ContentLength);
+            }
+
+            userToUpdate.FirstName = model.FirstName;
+            userToUpdate.LastName = model.LastName;
+            userToUpdate.Interest = model.Interest;
+            userToUpdate.Email = model.Email;
+            userToUpdate.UserName = model.UserName;
+            userToUpdate.UserImage = imageData;
+            // if (!TryUpdateModel(userToUpdate, "", new[] {"FirstName", "LastName", "Interest", "Email", "UserName"})) return View();
+            await UserManager.UpdateAsync(userToUpdate);
+            return RedirectToAction("Index");
+        }
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]
