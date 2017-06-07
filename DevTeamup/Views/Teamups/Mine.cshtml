@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 '
-<div class="mine-title">
+<div class="title animated fadeIn">
     <h2 >Teamups I'm Hosting</h2>
 </div>
 <hr />
@@ -13,7 +13,7 @@
 <div class="teamups row">
     @foreach (var teamup in Model)
     {
-        <div class="col-md-4 future-meatup-col-wrapper">
+        <div id="teamup-holder" class="col-md-4 future-meatup-col-wrapper animated slideInRight">
             <div class="future-meatups-col">
                 <div class="future-meatups-photo">
                     <img src="@Url.Action("UserImages", "Home", new { id = teamup.OrganizerId })" alt="User image" width="100" height="100" />
@@ -27,11 +27,7 @@
                 <h4 class="future-meatups-language">
                     with @teamup.DevelopmentLanguage.Name
                 </h4>
-                <div class="future-meatups-date">
-                    <span>@teamup.DateTime.ToString("MMMM")</span>
-                    <span>@teamup.DateTime.ToString("d "),</span>
-                    <span>@teamup.DateTime.ToString("yyyy")</span>
-                </div>
+
                 @if (teamup.IsCanceled)
                 {
                     <span class="label label-warning pull-right">Cancelled</span>
@@ -50,6 +46,11 @@
                     </span>
                 </div>
 
+            </div>
+            <div class="future-meatups-date">
+                <span class="month">@teamup.DateTime.ToString("MMMM").ToUpper()</span>
+                <span class="day">@teamup.DateTime.ToString("d "),</span>
+                <span class="year">@teamup.DateTime.ToString("yyyy")</span>
             </div>
 
         </div>      
@@ -83,7 +84,7 @@
                                         method: "DELETE"
                                     })
                                     .done(function () {
-                                        eventSource.parents("li").fadeOut(function () {
+                                        eventSource.parents("#teamup-holder").fadeOut(function () {
                                             $(this).remove();
                                             toastr.success("The teamup has been Cancelled successfully.");
                                         });

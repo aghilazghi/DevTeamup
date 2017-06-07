@@ -1,9 +1,10 @@
 ﻿html {
-    font-size: 14px;
+    font-size: 16px;
 }
 body {
     padding-top: 80px;
     padding-bottom: 20px;
+    font-size: 16px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -19,16 +20,21 @@ body {
     white-space: normal;
 }
 
+.validation-summary-errors {
+    font-size: 1.4rem;
+}
+
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select {
-    max-width: 350px;
+    max-width: 450px;
     font-size: 1.4rem;
 }
 
 .required {
     color:  #607D8B;
+    font-size: 1.4rem;
 }
 .required:after
 {
@@ -171,17 +177,31 @@ h6,
 }
 
 .btn {
-    /*font-size: 16px;
-    padding: 6px 18px;*/
     -ms-border-radius: 8px;
     border-radius: 8px;
     font-size: 1.3rem;
 }
 
-
+.btn.btn-primary:disabled{
+    background-color: rgba(176, 190, 197, .7);
+}
 
 /*page specifice styles*/
 
+.custom-text-area {
+    max-width: 450px;
+    font-size: 1.4rem;
+}
+
+.title {
+    font-weight: bold;
+    color: #455A64;
+}
+
+.link-style {
+    font-size: 1.5rem;
+    padding-left: 1.8rem;
+}
 .popover-notifications .popover-title {
     font-weight: 700;
     color:  #64B5F6;
@@ -235,8 +255,12 @@ h6,
     color: #455A64;
 }
 
+.next-page {
+    margin-left: 1.2rem;
+}
+
 #search-teamps {
-    width: 300px;
+    width: 450px;
     margin-bottom: 5rem;
 }
 
@@ -250,12 +274,11 @@ h6,
 }
 
 .future-meatup-col-wrapper {
-    margin: 0;
+    margin-bottom: 4rem;
 }
 
 .future-meatups-col {
     background-color: rgba(176, 190, 197, .7);
-    margin-bottom: 4rem;
     padding: 0 1.8125rem 1.8125rem 1.8125rem
 
 }
@@ -290,23 +313,39 @@ h6,
     font-size: 1.5rem;
 }
 
-.future-meatups-date {
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 600;
-    font-style: italic;
-}
-
 .future-meaturps-details-buttons {
     text-align: center;
     font-size: 1.5rem;
-    padding: 10px;
+
 }
+
+.future-meatups-date {
+    font-size: 1.5rem;
+    background-color: rgba(69, 90, 100, .7);
+    text-align: center;
+    padding: .5rem 1rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.future-meatups-date .day {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
 
 .action-buttons {
     text-align: center;
     padding-top: 1.3rem;
     font-size: 1.4rem;
+}
+
+.link-font-size {
+    font-size: 1.2rem;
+}
+
+.left-padding-25 {
+    padding-left: 1.5625rem;
 }
 
 .mine-title {
@@ -502,7 +541,5 @@ h6,
     margin-top: 3rem;
 }
 
-.profile-edit textarea {
-    max-width: 350px;
-    font-size: 1.4rem;
-}
+
+

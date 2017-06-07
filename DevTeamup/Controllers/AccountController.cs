@@ -151,51 +151,50 @@ namespace DevTeamup.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(ExtendRegisterViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                if (model.UserProfileImage != null)
-                {
-                    if (model.UserProfileImage.ContentLength > (4 * 1024 * 1024))
-                    {
-                        ModelState.AddModelError("CustomError", "Image can not be larger than 4MB");
-                        return View();
-                    }
+            if (!ModelState.IsValid) return View(model);
 
-                    if (!(model.UserProfileImage.ContentType == "image/jpeg" || model.UserProfileImage.ContentType == "image/jpg" || model.UserProfileImage.ContentType == "image/gif"))
-                    {
-                        ModelState.AddModelError("CustomError", "Image must be of type jpeg, jpg, or gif");
-                    }
+            var user = new ApplicationUser
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Interest = model.Interest
+            };
+
+            if (model.UserProfileImage != null)
+            {
+                if (model.UserProfileImage.ContentLength > (4 * 1024 * 1024))
+                {
+                    ModelState.AddModelError("CustomError", "Image can not be larger than 4MB");
+                    return View();
+                }
+
+                if (!(model.UserProfileImage.ContentType == "image/jpeg" || model.UserProfileImage.ContentType == "image/jpg" || model.UserProfileImage.ContentType == "image/gif"))
+                {
+                    ModelState.AddModelError("CustomError", "Image must be of type jpeg, jpg, or gif");
                 }
 
                 var imageData = new byte[model.UserProfileImage.ContentLength];
                 model.UserProfileImage.InputStream.Read(imageData, 0, model.UserProfileImage.ContentLength);
-
-                var user = new ApplicationUser
-                {
-                    UserName = model.Email,
-                    Email = model.Email,
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    Interest = model.Interest,
-                    UserImage = imageData
-                };
-                
-                var result = await UserManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);
+                user.UserImage = imageData;
             }
+                
+            var result = await UserManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
+            {
+                await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    
+                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                return RedirectToAction("Index", "Home");
+            }
+            AddErrors(result);
 
             // If we got this far, something failed, redisplay form
             return View(model);

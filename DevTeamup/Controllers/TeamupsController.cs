@@ -1,9 +1,11 @@
-﻿using DevTeamup.Models;
+﻿using System.Collections.Generic;
+using DevTeamup.Models;
 using DevTeamup.ViewModels;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using DevTeamup.Infrastructure;
 
 namespace DevTeamup.Controllers
 {
@@ -11,6 +13,7 @@ namespace DevTeamup.Controllers
     public class TeamupsController : Controller
     {
         private ApplicationDbContext _context;
+        private const int TeamupsPerPage = 6;
 
         public TeamupsController()
         {
@@ -32,7 +35,7 @@ namespace DevTeamup.Controllers
         }
 
         
-        public ActionResult Favoring()
+        public ActionResult Favoring(int page = 1)
         {
             var currentUserId = User.Identity.GetUserId();
             var teamups = _context.Favorites
@@ -41,20 +44,28 @@ namespace DevTeamup.Controllers
                 .Include(c => c.Organizer)
                 .Include(c => c.DevelopmentLanguage)
                 .Include(c => c.DevelopmentType)
+                .OrderByDescending(t => t.CreatedOn)
+                .Skip((page - 1) * TeamupsPerPage)
+                .Take(TeamupsPerPage)
                 .ToList();
+
+            var totalTeamupsCount = teamups.Count;
+
+            teamups = CurrentTeamupPage(page, teamups);
 
             var viewModel = new TeamupsViewModel
             {
-                FutureTeamups = teamups,
+                FutureTeamups = new PagedData<Teamup>(teamups, totalTeamupsCount, page, TeamupsPerPage),
                 IsAuthenticated = User.Identity.IsAuthenticated,
                 CurrentUserId = currentUserId,
                 Title = "My Favorite Teamups"
             };
             return View("Teamups", viewModel);
+
         }
 
         
-        public ActionResult Contributing()
+        public ActionResult Contributing(int page = 1)
         {
             var currentUserId = User.Identity.GetUserId();
             var teamups = _context.Collaborations
@@ -65,15 +76,30 @@ namespace DevTeamup.Controllers
                 .Include(c => c.DevelopmentType)
                 .ToList();
 
+            var totalTeamupsCount = teamups.Count;
+
+            teamups = CurrentTeamupPage(page, teamups);
+
             var viewModel = new TeamupsViewModel
             {
-                FutureTeamups = teamups,
+                FutureTeamups = new PagedData<Teamup>(teamups, totalTeamupsCount, page, TeamupsPerPage),
                 IsAuthenticated = User.Identity.IsAuthenticated,
                 CurrentUserId = currentUserId,
                 Title = "Teamups I'm Contributing",
             };
 
             return View("Teamups", viewModel);
+
+        }
+
+        private static List<Teamup> CurrentTeamupPage(int page, IEnumerable<Teamup> teamups)
+        {
+            // get teamups for current page
+            return teamups
+                .OrderByDescending(t => t.CreatedOn)
+                .Skip((page - 1) * TeamupsPerPage)
+                .Take(TeamupsPerPage)
+                .ToList();
         }
 
         [AllowAnonymous]

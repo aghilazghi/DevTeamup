@@ -4,25 +4,70 @@
     ViewBag.Title = "Home Page";
 }
 
-<h3 class="future-meatups-title">@Model.Title</h3>
+<div class="title animated fadeIn">
+    <h2>@Model.Title</h2>
+</div>
+
 <hr />
-@using (Html.BeginForm("Search", "Teamups"))
-{
-    <div class="form-group">
-        <div id="search-teamps" class="input-group">
-            @Html.TextBoxFor(m => m.SearchTerm, new {@class = "form-control", placeholder = "Search for organizer, language, type ..."})
-            <span class="input-group-addon">
-                <i class="glyphicon glyphicon-search"></i>
+<div class="row animated fadeIn">
+    <div class="col-md-8">
+        @using (Html.BeginForm("Search", "Teamups"))
+        {
+            <div class="form-group">
+                <div id="search-teamps" class="input-group">
+                    @Html.TextBoxFor(m => m.SearchTerm, new {@class = "form-control", placeholder = "Search for organizer, language, type ..."})
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </span>
+                </div>
+            </div>   
+        }
+ 
+    </div>
+    <div class="col-md-4">
+        <div class="btn-group pull-right">
+            <span class="prevous-page">
+                
+                @if (Model.FutureTeamups.HasPreviousPage)
+                {
+                    <a href="@Url.Action("Index", "Home", new { page = Model.FutureTeamups.PreviousPage})" class="btn btn-primary btn-sm">
+                        <i class="glyphicon glyphicon-chevron-left"></i> 
+                    </a>
+                }
+                else
+                {
+                    <a href="#" class="btn btn-primary disabled btn-sm">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                    </a>
+                }
+
             </span>
+            <span class="next-page">
+                
+                @if (Model.FutureTeamups.HasNextPage)
+                {
+                    <a href="@Url.Action("Index", "Home", new {page = Model.FutureTeamups.NextPage})" class="btn btn-primary btn-sm">
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </a>
+                }
+                else
+                {
+                    <a href="#" class="btn btn-primary disabled btn-sm">
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </a>
+                }
+
+            </span>
+
         </div>
-    </div>   
-}
-<hr />
+    </div>
+</div>
+
 
 <div id="future-meatups row">
     @foreach (var teamup in Model.FutureTeamups)
     {
-        <div class="col-md-4 future-meatup-col-wrapper">
+        <div class="col-md-4 future-meatup-col-wrapper animated slideInRight">
             <div class="future-meatups-col">
                 <div class="future-meatups-photo">
                     <img src="@Url.Action("UserImages", "Home", new { id = teamup.OrganizerId })" alt="User image" width="100" height="100"/>  
@@ -36,19 +81,19 @@
                 <h4 class="future-meatups-language">
                     with @teamup.DevelopmentLanguage.Name
                 </h4>
-                <div class="future-meatups-date">
-                    <span>@teamup.DateTime.ToString("MMMM")</span>
-                    <span>@teamup.DateTime.ToString("d "),</span>
-                    <span>@teamup.DateTime.ToString("yyyy")</span>
-                </div>
+             
                 @if (teamup.IsCanceled)
                 {
                     <span class="label label-warning pull-right">Cancelled</span>
                 }
                 <div class="future-meaturps-details-buttons">
                     <a href="@Url.Action("Details", "Teamups", new {id = teamup.Id})">Details</a>
-                </div>
-               
+                </div>           
+            </div>
+            <div class="future-meatups-date">
+                <span class="month">@teamup.DateTime.ToString("MMMM").ToUpper()</span>
+                <span class="day">@teamup.DateTime.ToString("d "),</span>
+                <span class="year">@teamup.DateTime.ToString("yyyy")</span>
             </div>
             
         </div>

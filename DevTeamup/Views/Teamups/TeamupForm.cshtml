@@ -3,11 +3,11 @@
     ViewBag.Title = @Model.Title;
 }
 
-<div class="col-md-offset-2 col-md-10">
-    <h3>@Model.Title</h3>
-    <p class="required">All fields are required</p>
-    <hr />
+<div class="col-md-offset-3 title">
+    <h2>@Model.Title</h2>    
 </div>
+<p class="required col-md-offset-3">All fields are required</p>
+<hr />
 
 
 @using (Html.BeginForm(Model.Action, "Teamups", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -17,52 +17,53 @@
     @Html.HiddenFor(m => m.Id)
 
     <div class="form-group">
-        @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+        @Html.LabelFor(m => m.Address, new { @class = "col-md-3 control-label" })
+        <div class="col-md-9">
             @Html.TextBoxFor(m => m.Address, new { @class = "form-control", autofocus = "autofocus" })
             @Html.ValidationMessageFor(m => m.Address)
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Date, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+        @Html.LabelFor(m => m.Date, new { @class = "col-md-3 control-label" })
+        <div class="col-md-9">
             @Html.TextBoxFor(m => m.Date, new { @class = "form-control", placeholder = "example: Sep 1 2017" })
             @Html.ValidationMessageFor(m => m.Date)
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Time, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+        @Html.LabelFor(m => m.Time, new { @class = "col-md-3 control-label" })
+        <div class="col-md-9">
             @Html.TextBoxFor(m => m.Time, new { @class = "form-control", placeholder = "example: 13:00" })
             @Html.ValidationMessageFor(m => m.Time)
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.DevelopmentLanguage, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+        @Html.LabelFor(m => m.DevelopmentLanguage, new { @class = "col-md-3 control-label" })
+        <div class="col-md-9">
             @Html.DropDownListFor(m => m.DevelopmentLanguage, new SelectList(Model.DevelopmentLanguages, "Id", "Name"), "", new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.DevelopmentLanguage)
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.DevelopmentType, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+        @Html.LabelFor(m => m.DevelopmentType, new { @class = "col-md-3 control-label" })
+        <div class="col-md-9">
             @Html.DropDownListFor(m => m.DevelopmentType, new SelectList(Model.DevelopmentTypes, "Id", "Name"), "", new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.DevelopmentType)
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+        @Html.LabelFor(m => m.Description, new { @class = "col-md-3 control-label" })
+        <div class="col-md-9">
+            @Html.TextAreaFor(m => m.Description, new { @class = "form-control custom-text-area" })
             @Html.ValidationMessageFor(m => m.Description)
         </div>
     </div>
 
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-primary btn-lg" value="Save" />
+        <div class="col-md-offset-3 col-md-10">
+            <input type="submit" class="btn btn-primary btn-lg" value="Save Teamup" />
+            <span class="link-style">@Html.ActionLink("Cancel", "Index", "Home")</span>
         </div>
     </div>
 }

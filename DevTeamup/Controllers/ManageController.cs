@@ -82,7 +82,6 @@ namespace DevTeamup.Controllers
 
             var currentUserId = User.Identity.GetUserId();
             var userToUpdate = await UserManager.FindByIdAsync(currentUserId);
-            byte[] imageData = null;
 
             if (model.UserProfileImage != null)
             {
@@ -97,8 +96,9 @@ namespace DevTeamup.Controllers
                     ModelState.AddModelError("CustomError", "Image must be of type jpeg, jpg, or gif");
                 }
 
-                imageData = new byte[model.UserProfileImage.ContentLength];
+                var imageData = new byte[model.UserProfileImage.ContentLength];
                 model.UserProfileImage.InputStream.Read(imageData, 0, model.UserProfileImage.ContentLength);
+                userToUpdate.UserImage = imageData;
             }
 
             userToUpdate.FirstName = model.FirstName;
@@ -106,8 +106,7 @@ namespace DevTeamup.Controllers
             userToUpdate.Interest = model.Interest;
             userToUpdate.Email = model.Email;
             userToUpdate.UserName = model.UserName;
-            userToUpdate.UserImage = imageData;
-            // if (!TryUpdateModel(userToUpdate, "", new[] {"FirstName", "LastName", "Interest", "Email", "UserName"})) return View();
+
             await UserManager.UpdateAsync(userToUpdate);
             return RedirectToAction("Index");
         }

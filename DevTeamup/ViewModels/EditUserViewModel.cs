@@ -17,7 +17,6 @@ namespace DevTeamup.ViewModels
 
         [Required]
         [StringLength(250)]
-        [Display(Name = "Interest  ( Please enter your interest separated by commas )")]
         public string Interest { get; set; }
 
         [Required]
